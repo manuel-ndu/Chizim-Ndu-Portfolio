@@ -3,323 +3,861 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Chizim Ndu, Toronto data and business analyst. SQL, Power BI, Python and automation.">
-<title>Chizim Ndu Portfolio</title>
+<meta name="description" content="Chizim Ndu, data and business analyst in Toronto. SQL, Power BI, Python and automation across pension, rail, construction software and government.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chizim-ndu-portfolio.vercel.app/">
+<meta property="og:title" content="Chizim Ndu | Data and Business Analyst">
+<meta property="og:description" content="Data and business analyst in Toronto. SQL, Power BI, Python and automation.">
+<meta property="og:image" content="https://chizim-ndu-portfolio.vercel.app/img/chizim.jpg">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="img/chizim.jpg">
+<title>Chizim Ndu | Data and Business Analyst</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* Layout: one-screen overview in 5 columns, then detail sections below: a Power BI style report, the app on a phone, smaller projects. Single light theme to match Power BI. */
+/* Layout: one-screen overview in 5 scannable columns, then looping project stories, each with its own soft background tint. Single light theme to sit with the Power BI report. */
 :root{
- --paper:#fbfbfa; --ink:#1c1f24; --muted:#636a74; --rule:#e2e4e7; --accent:#0b6e4f;
- --pbi-canvas:#eaeaea; --pbi-tile:#ffffff; --pbi-ink:#252423; --pbi-muted:#605e5c; --pbi-line:#edebe9; --pbi-tab:#f3f2f1; --pbi-gold:#f2c811;
- --c1:#118dff; --c2:#12239e; --c3:#e66c37; --c4:#6b007b; --c5:#e044a7;
- --site:"Public Sans",system-ui,sans-serif;
- --pbi:"Segoe UI","Open Sans",system-ui,sans-serif;
+ --bg:#fbfbfa; --ink:#1c1f24; --muted:#69707a; --rule:#e2e4e7; --accent:#0b6e4f; --accent-soft:#dcefe6;
+ --good:#1f9d63; --bad:#d64545; --bad-soft:#fbe4e4;
+ --pbi-canvas:#eaeaea; --pbi-tile:#fff; --pbi-ink:#252423; --pbi-muted:#605e5c; --pbi-line:#edebe9; --pbi-tab:#f3f2f1; --pbi-gold:#f2c811;
+ --site:"Public Sans",system-ui,sans-serif; --pbi:"Segoe UI","Open Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
  color-scheme:light;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--site);font-size:14px;line-height:1.5}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--site);font-size:14px;line-height:1.5;transition:background-color .8s ease}
 .wrap{max-width:1320px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-h2{font-size:22px;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:0 0 10px;text-wrap:balance}
+.lede{color:var(--muted);font-size:16px;margin:0;max-width:44ch}
+.summary b{font-weight:700}
+.summary{font-size:clamp(17px,1.5vw,20px);font-weight:400;color:var(--ink);line-height:1.45;letter-spacing:-.005em;margin:0;max-width:46ch;text-wrap:pretty}
+.tagline{font-size:12px;color:var(--muted);margin-top:14px}
 
-/* Overview */
-.overview{padding-block:28px 36px;border-bottom:1px solid var(--rule)}
-.cols{display:grid;grid-template-columns:1.25fr 1.2fr 1fr 1fr 1fr;gap:0}
-.col{padding:4px 20px;border-left:1px solid var(--rule);min-width:0}
-.col:first-child{border-left:0;padding-left:0}
-.col:last-child{padding-right:0}
-.name{font-size:30px;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0 0 4px}
-.title{font-weight:600;color:var(--accent);margin:0 0 10px}
-.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-bottom:10px}
-.status i{width:7px;height:7px;border-radius:50%;background:#2fa36b;display:inline-block}
-.col p{margin:0 0 10px}
-.jobs,.plist{list-style:none;margin:0;padding:0;display:grid;gap:11px}
-.jobs b,.plist b{display:block;font-size:13.5px}
-.jobs span{display:block;font-size:12.5px;color:var(--muted)}
-.jobs em{font-style:normal;font-size:12.5px}
-.yr{font-variant-numeric:tabular-nums}
-.sk{margin-bottom:12px}
-.sk h4{font-size:12px;margin:0 0 4px;color:var(--muted);font-weight:600}
-.sk p{margin:0;font-size:13px}
-.plist a{text-decoration:none;color:var(--ink)}
-.plist a:hover b{color:var(--accent)}
-.plist span{display:block;font-size:12.5px;color:var(--muted)}
-.edu{margin-bottom:18px}
-.edu b{display:block}
-.edu span{font-size:12.5px;color:var(--muted)}
-.mail{font-size:13px;user-select:all;word-break:break-all;display:block;margin-bottom:10px}
-.btns{display:flex;flex-wrap:wrap;gap:6px}
-.btn{font:600 13px var(--site);padding:7px 12px;border-radius:4px;border:1px solid var(--rule);background:#fff;color:var(--ink);text-decoration:none;cursor:pointer}
-.btn.main{background:var(--accent);border-color:var(--accent);color:#fff}
-.more{margin-top:22px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+/* ---------- Overview ---------- */
+.hero{padding-block:28px 40px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+.cols{display:grid;grid-template-columns:1.1fr 1.4fr 1fr 1fr 1fr}
+.col{padding:4px 22px;border-left:1px solid var(--rule);min-width:0;animation:rise .7s both}
+.col:nth-child(2){animation-delay:.08s}.col:nth-child(3){animation-delay:.16s}.col:nth-child(4){animation-delay:.24s}.col:nth-child(5){animation-delay:.32s}
+@keyframes rise{from{opacity:.001;transform:translateY(14px)}}
+.col:first-child{border-left:0;padding-left:0}.col:last-child{padding-right:0}
+.photo{width:112px;height:112px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 4px var(--bg),0 0 0 6px var(--accent);margin:4px 0 16px}
+.name{font-size:32px;font-weight:900;line-height:1;letter-spacing:-.03em;margin:0 0 6px}
+.title{font-weight:600;color:var(--accent);margin:0 0 12px;font-size:15px}
+.intro{font-size:14.5px;line-height:1.5;margin:0;max-width:26ch;color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:5px 10px;border-radius:99px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:blink 1.8s infinite}
+@keyframes blink{50%{opacity:.3}}
+.hook{font-size:15px;margin:14px 0 0;max-width:24ch;font-weight:500}
+.wins{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.wins li{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:center}
+.badge{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;font-size:10.5px;font-weight:800;letter-spacing:.02em;color:#fff}
+.wins .n{font-size:22px;font-weight:900;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.wins .n small{font-size:13px;font-weight:600;letter-spacing:0;color:var(--ink);margin-left:6px}
+.wins .w{font-size:11.5px;color:var(--muted);margin-top:3px}
+.xp{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.xp>li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center}
+.xp .badge{width:40px;height:40px;font-size:10px;position:relative;overflow:hidden}
+.xp .badge img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:3px}
+.xp .role{display:block;font-size:13.5px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.xp .co{display:block;font-size:12.5px;color:var(--accent);font-weight:600;margin:1px 0 0}
+.xp .yr2{display:block;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.xp .co em{font-style:normal;color:var(--muted);font-weight:400;font-variant-numeric:tabular-nums;margin-left:4px}
+.xp ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.xp ul li{font-size:12px;color:var(--muted);line-height:1.35}
+.xp ul li strong{color:var(--ink);font-weight:900;font-size:13px;margin-right:3px}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sk{display:grid;justify-items:center;gap:6px;padding:10px 4px;border-radius:10px;background:#fff;border:1px solid var(--rule);font-size:11px;font-weight:600;text-align:center;transition:transform .2s}
+.sk:hover{transform:translateY(-3px)}
+.sk svg.i{width:22px;height:22px;color:var(--accent)}
+.plist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.plist a{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;text-decoration:none;color:var(--ink);padding:6px;margin:-6px;border-radius:8px;transition:background .2s}
+.plist a:hover{background:#fff}
+.plist .ico{width:34px;height:34px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.plist b{font-size:13.5px;display:block;line-height:1.2}
+.plist span span{font-size:11.5px;color:var(--muted)}
+.edu{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;margin-bottom:22px}
+.edu .ico{width:34px;height:34px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.edu b{font-size:18px;font-weight:900;display:block;line-height:1.1}
+.edu span span{font-size:11.5px;color:var(--muted)}
+.links{display:grid;gap:8px}
+.links a,.links span{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink);text-decoration:none;font-weight:500;word-break:break-all}
+.links a:hover{color:var(--accent)}
+.links svg.i{color:var(--accent)}
+.cue{margin-top:34px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.cue .mouse{width:18px;height:28px;border:2px solid var(--muted);border-radius:10px;position:relative}
+.cue .mouse:after{content:"";position:absolute;left:50%;top:5px;width:2px;height:6px;margin-left:-1px;background:var(--muted);border-radius:2px;animation:wheel 1.6s infinite}
+@keyframes wheel{to{transform:translateY(8px);opacity:0}}
 
-/* Sections */
-section.detail{padding-block:44px;border-bottom:1px solid var(--rule)}
-.lede{color:var(--muted);margin:0 0 18px;max-width:70ch}
+/* ---------- Stories ---------- */
+.story{position:relative}
+.story.tall{height:auto}
+.hint{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);margin-top:18px}
+.hint i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite}
+.play{cursor:pointer}
+.stage>.wrap{min-width:0;width:100%}
+.stage{position:relative;display:grid;align-items:center;padding-block:48px;min-height:100vh;min-height:100svh}
+.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:center}
+.big{font-size:clamp(56px,8vw,104px);font-weight:900;letter-spacing:-.04em;line-height:.9;font-variant-numeric:tabular-nums;margin:22px 0 4px}
+.big+.cap{font-size:13px;color:var(--muted)}
+.bar{height:10px;border-radius:99px;background:var(--rule);margin-top:16px;position:relative;overflow:hidden;max-width:360px}
+.bar b{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:99px;width:0}
+.bar .tgt{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);left:75%}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:8px;max-width:360px;justify-content:space-between}
 
-/* Power BI style report */
-.report-scroll{overflow-x:auto;border:1px solid #c8c6c4;border-radius:2px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+/* Cleanup table */
+.sheet{background:#fff;border:1px solid var(--rule);border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(30,50,80,.08)}
+.sheet .top{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--rule);align-items:center;font-size:12px;color:var(--muted)}
+.sheet .top i{width:9px;height:9px;border-radius:50%;background:var(--rule)}
+.sheet .top span{margin-left:8px}
+.sheet-scroll{overflow-x:auto}
+.grid-t{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;min-width:540px}
+.grid-t th{font-family:var(--site);text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:9px 12px;background:#f7f8f9;border-bottom:1px solid var(--rule)}
+.grid-t td{padding:9px 12px;border-bottom:1px solid #f0f1f3;white-space:nowrap;transition:background .4s,color .4s}
+.grid-t td.gap{background:repeating-linear-gradient(135deg,var(--bad-soft) 0 6px,#fff 6px 12px);color:transparent}
+.grid-t td.gap:before{content:"missing";color:var(--bad);font-size:10px;font-family:var(--site);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.grid-t td.fixed{background:#e8f6ee;color:var(--ink)}
+.grid-t td.fixed:before{content:none}
+
+/* Report */
+#dashboard .stage{padding-block:28px}
+#dashboard h2{font-size:clamp(24px,2.6vw,34px)}
+#dashboard .rhead{margin-bottom:14px}
+.report-fit{overflow:hidden}
+.report-fit .report-scroll{transform-origin:top left}
+.rhead{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.auto{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.auto .ring{width:16px;height:16px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--t,0)*1turn),var(--rule) 0)}
+.report-scroll{overflow-x:auto;border:1px solid #c8c6c4;box-shadow:0 14px 40px rgba(0,0,0,.08);background:var(--pbi-canvas)}
 .report{min-width:960px;background:var(--pbi-canvas);font-family:var(--pbi);color:var(--pbi-ink);display:grid;grid-template-columns:1fr 26px}
-.canvas{padding:14px;display:grid;gap:10px;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(0,auto)}
-.rtitle{grid-column:span 12;display:flex;justify-content:space-between;align-items:center;background:var(--pbi-tile);padding:10px 14px;border-radius:2px}
-.rtitle h3{margin:0;font-size:18px;font-weight:600}
-.rtitle small{color:var(--pbi-muted);font-size:11px}
+.canvas{padding:14px;display:grid;gap:10px;grid-template-columns:repeat(12,1fr);transition:opacity .35s}
+.canvas.fade{opacity:.15}
+.rtitle{grid-column:span 12;display:flex;justify-content:space-between;align-items:center;background:var(--pbi-tile);padding:10px 14px}
+.rtitle h3{margin:0;font-size:18px;font-weight:600}.rtitle small{color:var(--pbi-muted);font-size:11px}
 .slicers{grid-column:span 12;display:flex;gap:10px;flex-wrap:wrap}
-.slicer{background:var(--pbi-tile);padding:8px 12px;border-radius:2px;display:flex;align-items:center;gap:10px}
+.slicer{background:var(--pbi-tile);padding:8px 12px;display:flex;align-items:center;gap:10px}
 .slicer label{font-size:11px;color:var(--pbi-muted);font-weight:600}
 .slicer .opts{display:flex;gap:4px;flex-wrap:wrap}
-.slicer button{font:12px var(--pbi);border:1px solid #c8c6c4;background:#fff;color:var(--pbi-ink);padding:3px 9px;cursor:pointer;border-radius:1px}
+.slicer button{font:12px var(--pbi);border:1px solid #c8c6c4;background:#fff;color:var(--pbi-ink);padding:3px 9px;cursor:pointer}
 .slicer button[aria-pressed="true"]{background:var(--pbi-ink);border-color:var(--pbi-ink);color:#fff}
-.card{grid-column:span 3;background:var(--pbi-tile);padding:12px 14px;border-radius:2px;text-align:center}
+.card{grid-column:span 3;background:var(--pbi-tile);padding:12px 14px;text-align:center}
 .card .v{font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15}
 .card .l{font-size:12px;color:var(--pbi-muted)}
-.vis{background:var(--pbi-tile);padding:10px 12px;border-radius:2px;min-width:0}
+.vis{background:var(--pbi-tile);padding:10px 12px;min-width:0}
 .vis h4{margin:0 0 6px;font-size:13px;font-weight:600}
 .vis .box{position:relative;height:210px}
-.w7{grid-column:span 7}.w5{grid-column:span 5}.w4{grid-column:span 4}.w8{grid-column:span 8}
+.w7{grid-column:span 7}.w5{grid-column:span 5}
 .tbl{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
 .tbl th{text-align:left;font-weight:600;border-bottom:2px solid var(--pbi-line);padding:5px 6px}
 .tbl td{padding:5px 6px;border-bottom:1px solid var(--pbi-line)}
 .tbl td:not(:first-child),.tbl th:not(:first-child){text-align:right}
 .tbl tr.total td{font-weight:700;border-top:2px solid var(--pbi-line)}
-.fpane{background:var(--pbi-tile);border-left:1px solid #c8c6c4;writing-mode:vertical-rl;font-size:12px;color:var(--pbi-muted);padding:12px 0;text-align:center;letter-spacing:.04em}
-.tabsbar{grid-column:1 / -1;display:flex;align-items:flex-end;gap:2px;background:var(--pbi-tab);border-top:1px solid #c8c6c4;padding:0 10px;font-family:var(--pbi)}
+.fpane{background:var(--pbi-tile);border-left:1px solid #c8c6c4;writing-mode:vertical-rl;font-size:12px;color:var(--pbi-muted);padding:12px 0;text-align:center}
+.tabsbar{grid-column:1 / -1;display:flex;align-items:flex-end;gap:2px;background:var(--pbi-tab);border-top:1px solid #c8c6c4;padding:0 10px}
 .tabsbar button{font:13px var(--pbi);border:0;background:transparent;color:var(--pbi-muted);padding:8px 14px 6px;cursor:pointer;border-bottom:3px solid transparent}
 .tabsbar button[aria-selected="true"]{color:var(--pbi-ink);background:#fff;border-bottom-color:var(--pbi-gold);font-weight:600}
 .tabsbar .pg{margin-left:auto;font-size:11px;color:var(--pbi-muted);padding:8px 0}
-.demo-note{font-size:12px;color:var(--muted);margin-top:8px}
+.report.dark{--pbi-canvas:#151c2a;--pbi-tile:#1f2838;--pbi-ink:#e8edf5;--pbi-muted:#94a3b8;--pbi-line:#2c3850}
+.report.teal{--pbi-canvas:#e4eeea;--pbi-line:#dde7e3}
+.report.dark .tabsbar{background:#10161f;border-color:#2c3850}.report.dark .tabsbar button[aria-selected="true"]{background:#1f2838;color:#e8edf5}
+.report.dark .fpane{background:#1f2838;border-color:#2c3850}
+.report.dark .slicer button{background:#151c2a;border-color:#3a4760;color:#e8edf5}.report.dark .slicer button[aria-pressed="true"]{background:#3fd0c9;border-color:#3fd0c9;color:#10161f}
+.report.teal .slicer button[aria-pressed="true"]{background:#0f7b6c;border-color:#0f7b6c}
+.rtitle.banner{background:#0f7b6c;color:#fff}.rtitle.banner small{color:#cfe8e1}
+.vis h4,.rtitle h3{color:var(--pbi-ink)}.rtitle.banner h3{color:#fff}
+.card.tall{grid-column:auto;text-align:left;padding:14px 16px}.card.tall .v{font-size:28px}
+.card.good .v{color:#3fd0c9}.card.warn .v{color:#ff6b5b}
+.w3{grid-column:span 3}.w9{grid-column:span 9}.w8{grid-column:span 8}.w4{grid-column:span 4}.w6{grid-column:span 6}
+.side{display:grid;gap:10px;align-content:start}
+.slicer.v{flex-direction:column;align-items:stretch;gap:6px}.slicer.v .opts{gap:3px}.slicer.v button{text-align:left}
+.stack{display:grid;gap:10px;min-width:0}.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.w12{grid-column:span 12}
+.gauge{position:relative}.gauge .gv{position:absolute;left:0;right:0;bottom:8px;text-align:center}.gauge .gv b{display:block;font-size:30px;font-weight:600;color:var(--pbi-ink)}.gauge .gv span{font-size:11px;color:var(--pbi-muted)}
+.tbl.heat td{text-align:center!important;font-variant-numeric:tabular-nums}.tbl.heat td:first-child{text-align:left!important}.tbl.heat th:not(:first-child){text-align:center}
+.bars{display:grid;gap:12px;padding-top:6px}.bars div{display:grid;grid-template-columns:1fr;gap:3px;font-size:11px;color:var(--pbi-muted);position:relative}
+.bars i{display:block;height:12px;background:#f2c811;border-radius:2px}.bars b{position:absolute;right:0;top:0;color:var(--pbi-ink);font-weight:600}
+.funnel{display:grid;gap:8px;padding:6px 0}.funnel div{display:grid;grid-template-columns:1fr 130px;align-items:center;gap:10px;font-size:12px;color:var(--pbi-muted)}
+.funnel i{display:block;margin:0 auto;height:26px;border-radius:3px;color:#fff;font-style:normal;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center;min-width:44px}
+.dqtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px}
+.dqtabs button{font:600 12.5px var(--site);padding:7px 12px;border-radius:99px;border:1px solid var(--rule);background:#fff;color:var(--muted);cursor:pointer;position:relative;overflow:hidden}
+.dqtabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.dqtabs button[aria-selected="true"]:after{content:"";position:absolute;left:0;bottom:0;height:2px;width:calc(var(--t,0)*100%);background:#7fd6ae}
+.dqp .summary{min-height:5.8em}
+.duo{display:flex;gap:40px;margin-top:22px}
+.duo>div{display:grid}
+.big.sm{font-size:clamp(48px,6vw,80px);margin:0 0 4px}
+.big.warn{color:#c8553d}
+.dqvis{position:relative;min-width:0}
+.mapsvg,.ansvg{width:100%;height:auto;display:block}
+.mapsvg text{font:12px var(--mono);fill:var(--ink)}
+.mapsvg .hd{font:700 10.5px var(--site);letter-spacing:.08em;fill:var(--muted)}
+.mapsvg .tag{font:700 9px var(--site);fill:#fff}
+.mapsvg .fld{fill:#f7f8f9;stroke:var(--rule)}
+.mapsvg .ln{fill:none;stroke:#b9c6d6;stroke-width:1.6;stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
+.mapsvg .ok .ln{stroke:var(--accent)}.mapsvg .bad .ln{stroke:#c8553d;stroke-dasharray:4 4}
+.mapsvg .mk{opacity:0;transition:opacity .3s}.mapsvg .on .mk{opacity:1}
+.sql{margin:0;padding:12px 14px;background:#0f1620;color:#cfe3f5;font:12px/1.6 var(--mono);min-height:100px;white-space:pre-wrap}
+.sql .k{color:#7fb8ff}.sql .f{color:#f2c811}
+.ansvg text{font:10px var(--site);fill:var(--muted)}
+.xl{background:#fff;border:1px solid #d0d5da;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(30,50,80,.08);font-family:"Segoe UI","Open Sans",system-ui,sans-serif}
+.xl-ribbon{display:flex;gap:16px;align-items:center;background:#1e6e43;color:#e6f2ea;font-size:12px;padding:8px 14px}
+.xl-ribbon b{color:#fff;margin-right:10px;font-weight:600}
+.xl-fbar{display:flex;align-items:center;gap:10px;padding:6px 10px;border-bottom:1px solid #d0d5da;font-size:12px;font-family:var(--mono)}
+.xl-ref{min-width:42px;padding:2px 6px;border:1px solid #d0d5da;text-align:center;font-family:"Segoe UI",sans-serif}
+.xl-fx{color:#888;font-style:italic;font-family:serif}
+.xl-scroll{overflow-x:auto}
+.xl-grid{border-collapse:collapse;width:100%;min-width:560px;font-size:12px;font-variant-numeric:tabular-nums}
+.xl-grid th{background:#f3f3f3;color:#555;font-weight:400;border:1px solid #dcdcdc;padding:3px 6px;font-size:11px}
+.xl-grid td{border:1px solid #e3e3e3;padding:5px 8px;white-space:nowrap;transition:background .3s}
+.xl-grid td.rn{background:#f3f3f3;color:#555;text-align:center;font-size:11px;width:24px}
+.xl-grid td.n{text-align:right}
+.xl-grid tr.hdr td:not(.rn){font-weight:600;background:#e8f2ec}
+.xl-grid tr.cur td.d{outline:2px solid #1e6e43;outline-offset:-2px}
+.xl-grid tr.mis td.f,.xl-grid tr.mis td.g{background:#fde2df;color:#b42318;font-weight:600}
+.xl-grid tr.ok td.g{color:#1e6e43}
+.xl-grid tr.tot td{font-weight:700;border-top:2px solid #999}
+.xl-tabs{display:flex;gap:2px;background:#f3f3f3;border-top:1px solid #d0d5da;font-size:11.5px;padding:0 8px}
+.xl-tabs span{padding:5px 12px;color:#555}.xl-tabs span.on{background:#fff;color:#1e6e43;font-weight:600;border-bottom:2px solid #1e6e43}
+.pbiv{border-top:3px solid #f2c811}.pbiv .top{font-family:"Segoe UI","Open Sans",sans-serif}
+.apptitle{font-size:20px;font-weight:700;margin:0;letter-spacing:-.01em}
+.res{border-top:1px solid #d0d5da}
+.res-tabs{display:flex;gap:2px;align-items:center;background:#f3f4f6;font:12px "Segoe UI",sans-serif;padding:0 8px;border-bottom:1px solid #d0d5da}
+.res-tabs span{padding:6px 12px;color:#555}.res-tabs span.on{background:#fff;color:#111;border-bottom:2px solid #2f6fde}
+.res-tabs em{margin-left:auto;font-style:normal;color:#555;font-size:11.5px}
+.res-scroll{overflow-x:auto;min-height:118px}
+.res-grid{border-collapse:collapse;width:100%;min-width:480px;font:12px var(--mono);font-variant-numeric:tabular-nums}
+.res-grid th{text-align:left;font-weight:600;background:#fafafa;border:1px solid #e3e3e3;padding:5px 8px;color:#333}
+.res-grid td{border:1px solid #ececec;padding:6px 8px}
+.res-grid td.rn{background:#fafafa;color:#888;width:24px;text-align:center}
+.res-grid td.n{text-align:right}
+.res-grid td.dev{color:#b42318;font-weight:600}
+.proc{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:22px;box-shadow:0 10px 30px rgba(20,60,40,.08);display:grid;gap:18px}
+.lane{display:grid;gap:8px}.lane .lt{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pills{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.pill2{font-size:12.5px;padding:8px 11px;border-radius:8px;border:1px solid var(--rule);background:#f7f8f9;transition:all .35s}
+.pill2.b.x{text-decoration:line-through;color:var(--muted);opacity:.45}
+.pill2.a{opacity:0;transform:translateY(6px);background:#eef8f2;border-color:#bfe0cc;color:#0b4f37;font-weight:600}
+.pill2.a.in{opacity:1;transform:none}
+.arr{font-style:normal;color:var(--muted);transition:opacity .3s}
+.lane.after .arr{color:var(--accent)}
+.green{background:#0a0f0b;border-radius:12px;padding:18px 20px;box-shadow:0 10px 30px rgba(0,0,0,.25);border:10px solid #2b2f33}
+.g5250{margin:0;color:#3dff6e;font:12.5px/1.55 "IBM Plex Mono","JetBrains Mono",monospace;white-space:pre;overflow-x:auto;min-height:290px;text-shadow:0 0 4px rgba(61,255,110,.35)}
+.g5250 u{text-decoration:none;border-bottom:1px solid #3dff6e;color:#eaffef}
+.mlog{min-height:96px}
+.emu{background:#d9dcdf;border:1px solid #b7bcc2;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.18);font-family:"Segoe UI","Open Sans",system-ui,sans-serif}
+.emu-menu{display:flex;gap:14px;font-size:12px;padding:5px 12px;background:#eceef0;border-bottom:1px solid #c3c8cd;color:#333}
+.emu-macro{display:flex;align-items:center;gap:6px;padding:5px 10px;background:#cfd3d7;border-bottom:1px solid #b7bcc2;font-size:11.5px;color:#333}
+.emu-macro .lbl{font-weight:600;margin-right:4px}
+.emu-macro .b{font-style:normal;width:22px;height:20px;display:grid;place-items:center;background:#e8eaec;border:1px solid #aab0b6;border-radius:3px;font-size:10px;color:#444}
+.emu-macro .b.rec{color:#c0392b}.emu-macro .b.play.on{background:#bfe3cb;border-color:#5aa877;color:#1e6e43}
+.emu-macro .mname{margin-left:6px;padding:2px 8px;background:#fff;border:1px solid #aab0b6;border-radius:3px;font-family:var(--mono);font-size:11px}
+.emu-macro .mstat{margin-left:auto;color:#555}
+.emu .g5250{background:#050805;padding:16px 18px;min-height:250px}
+.emu-status{display:flex;justify-content:space-between;font-size:11px;padding:4px 12px;background:#eceef0;color:#555;border-top:1px solid #c3c8cd}
+.mailvis{display:grid;gap:12px}
+.gs{background:#fff;border:1px solid #d0d5da;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(30,50,80,.08);font-family:"Open Sans",system-ui,sans-serif}
+.gs-top{display:flex;gap:14px;align-items:center;font-size:12px;padding:8px 12px;border-bottom:1px solid #d0d5da;color:#444}
+.gs-top b{color:#188038;font-weight:600;margin-right:6px}
+.gs-top em{margin-left:auto;font-style:normal;color:#666}
+.gs-grid{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+.gs-grid th{background:#f8f9fa;color:#666;font-weight:400;border:1px solid #e2e3e5;padding:3px 6px;font-size:11px}
+.gs-grid td{border:1px solid #e8e9eb;padding:5px 8px;transition:background .3s}
+.gs-grid td.rn{background:#f8f9fa;color:#777;text-align:center;font-size:11px;width:24px}
+.gs-grid td.n{text-align:right}
+.gs-grid tr.hdr td:not(.rn){font-weight:600;background:#e6f4ea}
+.gs-grid tr.cur td:not(.rn){background:#e8f0fe}
+.gs-grid tr.due td:not(.rn){background:#fce8e6;color:#a50e0e;font-weight:600}
+.inbox{display:grid;gap:6px}
+.mail{background:#fff;border:1px solid var(--rule);border-left:3px solid #188038;border-radius:6px;padding:8px 12px;display:grid;gap:1px;font-size:12px;opacity:0;transform:translateY(8px);transition:all .4s}
+.mail.in{opacity:1;transform:none}
+.mail b{font-size:12.5px}.mail span{color:var(--muted);font-size:11.5px}
+.demo-note{font-size:12px;color:var(--muted);margin-top:10px}
 
-/* Phone prop */
-.app{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
-.phone{width:250px;height:510px;border-radius:40px;background:#111;padding:11px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
-.screen{height:100%;border-radius:30px;background:linear-gradient(160deg,#cfe3dc,#e8e1d3 55%,#d7d9e8);position:relative;overflow:hidden;padding:30px 16px 0}
-.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:84px;height:22px;background:#111;border-radius:12px}
-.sbar{position:absolute;top:10px;left:22px;font-size:11px;font-weight:700;color:#1c1f24}
-.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 10px;margin-top:18px}
-.ic{display:grid;justify-items:center;gap:3px;font-size:9px;color:#2b2f36}
-.ic s{display:block;width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,.65);text-decoration:none}
-.ic.hero s{background:#0b6e4f;display:grid;place-items:center;box-shadow:0 0 0 3px #fff,0 0 0 6px #0b6e4f}
-.ic.hero svg{width:24px;height:24px}
-.ic.hero{font-weight:700;color:#0b6e4f}
-.dock{position:absolute;left:12px;right:12px;bottom:12px;height:64px;border-radius:22px;background:rgba(255,255,255,.45);display:flex;justify-content:space-around;align-items:center}
-.dock s{width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.7)}
-.ic.hero{position:relative}
-.callout{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1c1f24;color:#fff;font-size:10px;padding:4px 8px;border-radius:4px;white-space:nowrap}
-.callout:after{content:"";position:absolute;bottom:-5px;left:50%;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#1c1f24}
+/* Flow */
+.flow{background:#fff;border:1px solid var(--rule);border-radius:14px;padding:22px;box-shadow:0 10px 30px rgba(20,60,40,.08)}
+.flow svg{width:100%;height:auto;display:block}
+.flow .node rect{fill:#fff;stroke:#cfd8d3;stroke-width:1.5;transition:fill .4s,stroke .4s}
+.flow .node text{font:600 13px var(--site);fill:var(--ink)}
+.flow .node .sub{font:400 11px var(--site);fill:var(--muted)}
+.flow .node .dot{fill:#cfd8d3;transition:fill .4s}
+.flow .node.on rect{fill:#eef8f2;stroke:var(--accent)}
+.flow .node.on .dot{fill:var(--accent)}
+.flow .node{opacity:.25;transition:opacity .4s}
+.flow .node.on{opacity:1}
+.flow .wire{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.flow .wire-bg{fill:none;stroke:#e3e8e5;stroke-width:2.5}
+.flow .pulse{fill:var(--accent)}
+.steps{display:flex;gap:18px;margin-top:22px;flex-wrap:wrap}
+.steps div{font-size:12px;color:var(--muted)}
+.steps b{display:block;font-size:26px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+/* Letters */
+.lettersgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center}
+.rows{background:#fff;border:1px solid var(--rule);border-radius:10px;overflow:hidden;font-family:var(--mono);font-size:12px}
+.rows div{display:grid;grid-template-columns:80px 1fr 90px;gap:8px;padding:9px 12px;border-bottom:1px solid #f0f1f3;transition:background .3s,opacity .3s}
+.rows div.h{font-family:var(--site);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:#f7f8f9}
+.rows div.done{opacity:.35}
+.rows div.now{background:#fff6dd}
+.pile{position:relative;height:300px}
+.letter{position:absolute;inset:0 10% auto;height:270px;background:#fff;border:1px solid var(--rule);border-radius:6px;box-shadow:0 8px 24px rgba(80,60,20,.1);padding:22px 22px;font-size:11.5px;color:var(--muted);transform-origin:center;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.letter .lh{display:flex;justify-content:space-between;margin-bottom:16px;font-weight:700;color:var(--ink);font-size:12px}
+.letter .lh i{width:28px;height:28px;border-radius:6px;background:var(--accent-soft)}
+.letter mark{background:#fff3c4;color:var(--ink);padding:0 3px;border-radius:2px;font-family:var(--mono)}
+.letter .ln{height:6px;background:#eef0f2;border-radius:3px;margin:8px 0}
+.term{margin-top:16px;background:#0e1a12;color:#7dff9b;font-family:var(--mono);font-size:11.5px;padding:12px 14px;border-radius:8px;min-height:86px;white-space:pre-line}
+.term:after{content:"▋";animation:blink 1s steps(1) infinite}
+
+/* App */
+.devices{display:flex;align-items:flex-end;justify-content:center;gap:34px;flex-wrap:wrap}
+.imac{width:min(430px,62vh);max-width:100%}
+.imac .scr{aspect-ratio:16/10;max-width:100%;background:#1c1f24;border-radius:14px 14px 0 0;padding:10px;position:relative}
+.imac .desk{position:absolute;inset:10px;border-radius:5px;overflow:hidden;background:linear-gradient(140deg,#b9d7cc,#d9cfe8 60%,#efe1cc)}
+.imac .win{position:absolute;background:rgba(255,255,255,.85);border-radius:5px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.imac .win:before{content:"";position:absolute;left:7px;top:6px;width:24px;height:6px;border-radius:3px;background:#e1e3e6}
+.imac .chin{height:34px;background:#d9dbde;border-radius:0 0 14px 14px}
+.imac .stand{width:90px;height:52px;margin:0 auto;background:linear-gradient(#c9cbcf,#b3b6ba);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+.cursor{position:absolute;left:20%;top:30%;width:18px;height:18px;animation:cur 8s infinite;z-index:3}
+.cursor svg{width:18px;height:18px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
+.cursor:after{content:"";position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;border:2px solid var(--accent);opacity:0;animation:clk 8s infinite}
+@keyframes cur{0%,22%{left:20%;top:30%}40%{left:62%;top:22%}55%{left:55%;top:62%}68%,80%{left:74%;top:55%}100%{left:20%;top:30%}}
+@keyframes clk{0%,68%{opacity:0;transform:scale(.4)}71%{opacity:1;transform:scale(1)}78%,100%{opacity:0;transform:scale(1.8)}}
+.phone{--ph:min(410px,50vh);height:var(--ph);width:calc(var(--ph)*.49);border-radius:34px;background:#111;padding:9px;box-shadow:0 18px 40px rgba(0,0,0,.2);flex:none}
+.screen{height:100%;border-radius:26px;position:relative;overflow:hidden;background:linear-gradient(160deg,#cfe3dc,#e8e1d3 55%,#d7d9e8)}
+.notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:70px;height:18px;background:#111;border-radius:10px;z-index:5}
+.home{position:absolute;inset:0;padding:34px 14px 0;animation:home 8s infinite}
+@keyframes home{0%,16%{opacity:1}20%,92%{opacity:0}97%,100%{opacity:1}}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 6px}
+.ic{display:grid;justify-items:center;gap:3px;font-size:8px;color:#2b2f36}
+.ic s{display:block;width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.65);text-decoration:none}
+.ic.hero{position:relative;font-weight:700;color:var(--accent)}
+.ic.hero s{background:var(--accent);display:grid;place-items:center;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--accent)}
+.ic.hero svg{width:20px;height:20px}
+.ic.hero:after{content:"";position:absolute;top:2px;left:50%;width:32px;height:32px;margin-left:-16px;border-radius:50%;background:rgba(255,255,255,.7);opacity:0;animation:tap 8s infinite}
+@keyframes tap{0%,9%{opacity:0;transform:scale(.3)}12%{opacity:1;transform:scale(1)}16%,100%{opacity:0;transform:scale(1.4)}}
+.mylabel{position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:9px;padding:3px 7px;border-radius:4px;white-space:nowrap}
+.appui{position:absolute;inset:0;background:#10231b;padding:36px 12px 12px;display:grid;grid-template-rows:auto 1fr auto;gap:10px;opacity:0;animation:appui 8s infinite}
+@keyframes appui{0%,17%{opacity:0;transform:scale(.92)}22%,90%{opacity:1;transform:none}95%,100%{opacity:0}}
+.appui .hd{color:#cfe9dc;font-size:10px;white-space:nowrap;gap:6px;font-weight:700;display:flex;justify-content:space-between}
+.appui .hd span{color:#5fd39a;font-weight:600}
+.pad{border-radius:16px;background:#183327;border:1px solid #23493a;position:relative;overflow:hidden}
+.pad:before{content:"Trackpad";position:absolute;bottom:8px;left:0;right:0;text-align:center;font-size:9px;color:#4f7d68;letter-spacing:.1em;text-transform:uppercase}
+.finger{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:rgba(255,255,255,.35);border:2px solid rgba(255,255,255,.7);left:20%;top:30%;animation:cur 8s infinite}
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btnrow i{height:40px;border-radius:10px;background:#183327;border:1px solid #23493a}
+.btnrow i:first-child{animation:press 8s infinite}
+@keyframes press{0%,68%,76%,100%{background:#183327}70%,74%{background:#2e7d5a}}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-.facts div{border-top:2px solid var(--accent);padding-top:8px}
-.facts b{display:block;font-size:13px}
-.facts span{font-size:13px;color:var(--muted)}
-.soon{font-size:12px;color:var(--muted);margin-top:16px}
+.facts div{border-top:2px solid var(--accent);padding-top:8px;font-size:13px;color:var(--muted)}
+.facts b{display:block;color:var(--ink);font-size:13px}
 
-.small{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.small h3{font-size:16px;margin:0 0 4px}
-.small p{margin:0;color:var(--muted)}
-footer{padding-block:28px 40px;color:var(--muted);font-size:12px}
+/* Contact */
+.contact{min-height:80vh;display:grid;place-items:center;text-align:center;padding-block:80px}
+.contact .photo{margin:0 auto 20px;width:88px;height:88px}
+.contact h2{font-size:clamp(34px,5vw,60px)}
+.contact .links{justify-items:center;margin-top:22px;gap:12px}
+.contact .links a,.contact .links span{font-size:16px}
+footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:center}
 
-@media (max-width:1100px){.cols{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:24px}.col:nth-child(4){border-left:0;padding-left:0}}
-@media (max-width:700px){.cols{grid-template-columns:1fr}.col{border-left:0;padding:0 0 18px;border-bottom:1px solid var(--rule)}.col:last-child{border-bottom:0}.app{grid-template-columns:1fr;justify-items:center;gap:28px}.facts,.small{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:1100px){.cols{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:28px}.col:nth-child(4){border-left:0;padding-left:0}}
+@media (max-width:860px){.split,.lettersgrid{grid-template-columns:1fr;gap:28px}.stage{padding-block:32px}.pile{height:250px}.letter{height:230px}}
+@media (max-width:700px){.cols{grid-template-columns:1fr;row-gap:0}.col{border-left:0;padding:18px 0;border-bottom:1px solid var(--rule)}.col:last-child{border-bottom:0}.hero{min-height:auto}.facts{grid-template-columns:1fr}.imac{width:100%}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.appui{opacity:1}.home{opacity:0}}
 </style>
 
 </head>
 <body>
-<div class="wrap">
- <div class="overview">
-  <div class="cols">
-   <div class="col">
-    <p class="eyebrow">Summary</p>
-    <h1 class="name">Chizim Ndu</h1>
-    <p class="title">Data and Business Analyst</p>
-    <span class="status"><i></i>Toronto · Open to work</span>
-    <p>4+ years turning messy data into clear reporting and automation that lasts, across pension, rail, construction software and government.</p>
-    <p>Raised member data completeness by over 40% at Ontario Teachers' Pension Plan and built freight KPI dashboards at CN that helped cut cargo delays by over 10%.</p>
-   </div>
-   <div class="col">
-    <p class="eyebrow">Work experience</p>
-    <ul class="jobs">
-     <li><b>Pension Data Analyst</b><span>Ontario Teachers' Pension Plan · <span class="yr" style="display:inline">2024–2026</span></span><em>Data completeness up 40%+</em></li>
-     <li><b>Business Systems Specialist</b><span>Safetyloop · <span class="yr" style="display:inline">2022–2024</span></span><em>Digitized safety inspection workflows</em></li>
-     <li><b>Data Analyst</b><span>CN Rail · <span class="yr" style="display:inline">2021</span></span><em>Cargo delays down 10%+</em></li>
-     <li><b>System Programmer / Analyst</b><span>Toronto Metropolitan University · <span class="yr" style="display:inline">2021</span></span><em>Alerts for 200+ certificates</em></li>
-     <li><b>Data Analyst</b><span>Canada Revenue Agency · <span class="yr" style="display:inline">2019–2020</span></span><em>VBA dashboard replaced a paid tool</em></li>
-    </ul>
-   </div>
-   <div class="col">
-    <p class="eyebrow">Skills</p>
-    <div class="sk"><h4>Data</h4><p>SQL, Power BI (DAX, Power Query), Python, Snowflake, Advanced Excel (VBA, macros), AS/400</p></div>
-    <div class="sk"><h4>Tools</h4><p>Power Automate, Jira, Confluence, SharePoint, Azure, Claude, Copilot</p></div>
-    <div class="sk"><h4>Ways of working</h4><p>Requirements gathering, process mapping, UAT, root cause analysis, stakeholder updates</p></div>
-   </div>
-   <div class="col">
-    <p class="eyebrow">Projects</p>
-    <ul class="plist">
-     <li><a href="#dashboard"><b>Power BI dashboards ↓</b><span>Customer, cargo and pension reports</span></a></li>
-     <li><a href="#app"><b>Remote mouse app ↓</b><span>Mobile app built with Claude Code</span></a></li>
-     <li><a href="#more"><b>Power Automate flows ↓</b><span>Automation for improvement projects</span></a></li>
-     <li><a href="#more"><b>Mass letter builder ↓</b><span>AS/400 macros and letter automation</span></a></li>
-    </ul>
-   </div>
-   <div class="col">
-    <p class="eyebrow">Education</p>
-    <div class="edu"><b>Bachelor of Commerce</b><span>Business / Information Technology Management<br>Toronto Metropolitan University</span></div>
-    <p class="eyebrow">Contact</p>
-    <span class="mail">Chizim.Ndu@gmail.com</span>
-    <div class="btns">
-     <a class="btn main" href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-     <a class="btn" href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a>
-     <button class="btn" type="button" id="copyMail">Copy email</button>
-    </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+ <symbol id="bars" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+ <symbol id="code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+ <symbol id="sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+ <symbol id="iflow" viewBox="0 0 24 24"><rect x="2" y="3" width="7" height="6" rx="1.5"/><rect x="15" y="15" width="7" height="6" rx="1.5"/><path d="M5.5 9v4a2 2 0 0 0 2 2h7.5"/></symbol>
+ <symbol id="share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></symbol>
+ <symbol id="gsuite" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></symbol>
+ <symbol id="snow" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7M9 4l3 2 3-2M9 20l3-2 3 2"/></symbol>
+ <symbol id="ticket" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></symbol>
+ <symbol id="cloud" viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 9.5 4.3 4.3 0 0 0 7 18z"/></symbol>
+ <symbol id="spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
+ <symbol id="cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5M22 9v6"/></symbol>
+ <symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+ <symbol id="in" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></symbol>
+ <symbol id="doc" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+ <symbol id="phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+ <symbol id="letter" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 9h8M8 13h8M8 17h4"/></symbol>
+ <symbol id="clean" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol>
+ <symbol id="pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+ <symbol id="ptr" viewBox="0 0 24 24"><path d="M5 3l13 7.5-6 1.5-3 6z" fill="#fff" stroke="#111" stroke-width="1.5"/></symbol>
+</svg>
+
+<header class="wrap hero" data-bg="#fbfbfa">
+ <div class="cols">
+  <div class="col">
+   <img class="photo" src="img/chizim.jpg" alt="Chizim Ndu">
+   <h1 class="name">Chizim Ndu</h1>
+   <p class="title">Data and Business Analyst</p>
+   <p class="intro">4+ years turning pension, rail, construction software and government data into clear reporting and automation.</p>
+  </div>
+  <div class="col">
+   <p class="eyebrow">Experience</p>
+   <ul class="xp">
+    <li><span class="badge" style="background:#0b4f8a">OTPP<img src="img/logos/otpp.png" alt="" onerror="this.remove()"></span><div><b class="role">Ontario Teachers' Pension Plan</b><span class="co">Pension Data Analyst</span><span class="yr2">2024–2026</span></div></li>
+    <li><span class="badge" style="background:#0b6e4f">SL<img src="img/logos/safetyloop.png" alt="" onerror="this.remove()"></span><div><b class="role">Safetyloop</b><span class="co">Business Systems Specialist</span><span class="yr2">2022–2024</span></div></li>
+    <li><span class="badge" style="background:#c0392b">CN<img src="img/logos/cn.png" alt="" onerror="this.remove()"></span><div><b class="role">CN Rail</b><span class="co">Data Analyst</span><span class="yr2">2021</span></div></li>
+    <li><span class="badge" style="background:#5b3fa0">TMU<img src="img/logos/tmu.png" alt="" onerror="this.remove()"></span><div><b class="role">Toronto Metropolitan University</b><span class="co">System Programmer / Analyst</span><span class="yr2">2021</span></div></li>
+    <li><span class="badge" style="background:linear-gradient(135deg,#8b5cf6,#3b2a8f)">AV<img src="img/logos/avasta.png" alt="" onerror="this.remove()"></span><div><b class="role">Avasta Incorporated</b><span class="co">Business Analyst</span><span class="yr2">2020</span></div></li>
+    <li><span class="badge" style="background:#8a5a12">CRA<img src="img/logos/cra.png" alt="" onerror="this.remove()"></span><div><b class="role">Canada Revenue Agency</b><span class="co">Data Analyst</span><span class="yr2">2019–2020</span></div></li>
+   </ul>
+  </div>
+  <div class="col">
+   <p class="eyebrow">Skills</p>
+   <div class="skills">
+    <div class="sk"><svg class="i"><use href="#db"/></svg>SQL</div>
+    <div class="sk"><svg class="i"><use href="#bars"/></svg>Power BI</div>
+    <div class="sk"><svg class="i"><use href="#code"/></svg>Python</div>
+    <div class="sk"><svg class="i"><use href="#sheet"/></svg>Excel VBA</div>
+    <div class="sk"><svg class="i"><use href="#iflow"/></svg>Power Automate</div>
+    <div class="sk"><svg class="i"><use href="#share"/></svg>SharePoint</div>
+    <div class="sk"><svg class="i"><use href="#gsuite"/></svg>Google Suite</div>
+    <div class="sk"><svg class="i"><use href="#cloud"/></svg>Azure</div>
+    <div class="sk"><svg class="i"><use href="#spark"/></svg>AI Tools</div>
    </div>
   </div>
-  <div class="more">Scroll for project details ↓</div>
+  <div class="col">
+   <p class="eyebrow">Projects</p>
+   <ul class="plist">
+    <li><a href="#cleanup"><span class="ico"><svg class="i"><use href="#clean"/></svg></span><span><b>Data cleanup</b><span>Gaps to 75% complete</span></span></a></li>
+    <li><a href="#dashboard"><span class="ico"><svg class="i"><use href="#bars"/></svg></span><span><b>Power BI report</b><span>3 pages, live filters</span></span></a></li>
+    <li><a href="#automation"><span class="ico"><svg class="i"><use href="#iflow"/></svg></span><span><b>Letter workflow</b><span>AI and Power Automate</span></span></a></li>
+    <li><a href="#automation"><span class="ico"><svg class="i"><use href="#letter"/></svg></span><span><b>Email alerts</b><span>Certificate expiry tracking</span></span></a></li>
+    <li><a href="#app"><span class="ico"><svg class="i"><use href="#phone"/></svg></span><span><b>Remote mouse app</b><span>Built with Claude Code</span></span></a></li>
+   </ul>
+  </div>
+  <div class="col">
+   <p class="eyebrow">Education</p>
+   <div class="edu"><span class="ico"><svg class="i"><use href="#cap"/></svg></span><span><b>BComm</b><span>Business / Information Technology Management · TMU</span></span></div>
+   <p class="eyebrow">Contact</p>
+   <div class="links">
+    <span><svg class="i"><use href="#mail"/></svg>Chizim.Ndu@gmail.com</span>
+    <a href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener"><svg class="i"><use href="#in"/></svg>LinkedIn</a>
+    <a href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#doc"/></svg>Resume (PDF)</a>
+    <span><svg class="i"><use href="#pin"/></svg>Toronto, ON</span>
+   </div>
+  </div>
  </div>
+ <div class="cue"><span class="mouse"></span>Scroll to see the work</div>
+</header>
 
- <section class="detail" id="dashboard">
-  <p class="eyebrow">Project · Power BI</p>
-  <h2>Analytics report</h2>
-  <p class="lede">A three-page report in the style I build in Power BI. Switch pages with the tabs at the bottom and filter with the slicers.</p>
-  <div class="report-scroll">
-   <div class="report" id="report">
-    <div class="canvas" id="canvas"></div>
-    <div class="fpane">Filters</div>
-    <div class="tabsbar" role="tablist" id="tabs"></div>
+<!-- 1. Data cleanup -->
+<section class="story tall" id="cleanup" data-bg="#eef3fa">
+ <div class="stage"><div class="wrap split">
+  <div>
+   <p class="eyebrow">Data quality</p>
+   <div class="dqtabs" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-t="0">Excel</button>
+    <button type="button" role="tab" aria-selected="false" data-t="1">Power BI</button>
+    <button type="button" role="tab" aria-selected="false" data-t="2">SQL</button>
+   </div>
+   <div class="dqp" data-t="1" hidden>
+    <p class="summary">I investigated member records with AS/400, Excel and Power BI to find missing and mismatched data. I helped shape and run the data completeness initiative, raising completeness by <b>over 40%</b> and hitting the <b>75% target</b> ahead of schedule.</p>
+    <div class="big" id="pct">35%</div><div class="cap">member data completeness</div>
+    <div class="bar"><b id="pctbar"></b><span class="tgt"></span></div>
+    <div class="legend"><span>Start</span><span>75% target</span></div>
+   </div>
+   <div class="dqp" data-t="0">
+    <p class="summary">I investigated <b>up to 20 data discrepancy and calculation error cases a day</b>, recalculating figures in Excel and flagging records where the amount on file didn't match.</p>
+    <div class="duo"><div><b class="big sm" id="mapN">0</b><span class="cap">records checked</span></div><div><b class="big sm warn" id="flagN">0</b><span class="cap">mismatches found</span></div></div>
+   </div>
+   <div class="dqp" data-t="2" hidden>
+    <p class="summary">At the Canada Revenue Agency, I <b>queried large provincial datasets daily using SQL</b> to identify trends, anomalies and discrepancies in financial records.</p>
+    <div class="duo"><div><b class="big sm" id="rowN">0</b><span class="cap">months scanned</span></div><div><b class="big sm warn" id="anN">0</b><span class="cap">anomalies flagged</span></div></div>
+   </div>
+   <div class="hint"><i></i>Hover to scrub · click to replay</div>
+  </div>
+  <div class="play dqvis" data-story="cleanup">
+   <div class="sheet dqv pbiv" data-t="1" hidden>
+    <div class="top"><i></i><i></i><i></i><span><b style="color:#252423">Member records</b> · Power BI table · illustration</span></div>
+    <div class="sheet-scroll"><table class="grid-t" id="cleanTable"></table></div>
+   </div>
+   <div class="xl dqv" data-t="0">
+    <div class="xl-ribbon"><b>Pension_Checks.xlsx</b><span>Home</span><span>Insert</span><span>Formulas</span><span>Data</span><span>Review</span></div>
+    <div class="xl-fbar"><span class="xl-ref" id="xlRef">D2</span><span class="xl-fx">fx</span><span id="xlF">=B2*C2*2%</span></div>
+    <div class="xl-scroll"><table class="xl-grid" id="xlGrid"></table></div>
+    <div class="xl-tabs"><span class="on">Calc check</span><span>Members</span><span>+</span></div>
+   </div>
+   <div class="sheet dqv" data-t="2" hidden>
+    <div class="top"><i></i><i></i><i></i><span>provincial_returns.sql · illustration</span></div>
+    <pre class="sql" id="sql"></pre>
+    <div class="res"><div class="res-tabs"><span class="on">Results</span><span>Messages</span><em id="resMsg">Ready</em></div><div class="res-scroll"><table class="res-grid" id="resGrid"></table></div></div>
    </div>
   </div>
-  <p class="demo-note">All figures are demo data generated for this portfolio. They are not from any employer.</p>
- </section>
+ </div></div>
+</section>
 
- <section class="detail" id="app">
-  <div class="app">
-   <div class="phone" aria-label="Phone home screen showing the Remote Mouse app">
-    <div class="screen">
-     <div class="notch"></div><span class="sbar">9:41</span>
-     <div class="apps">
-      <div class="ic"><s></s>Mail</div><div class="ic"><s></s>Notes</div><div class="ic"><s></s>Camera</div><div class="ic"><s></s>Photos</div>
-      <div class="ic"><s></s>Maps</div>
-      <div class="ic hero"><s><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l12 7-5.5 1.5L9 17z"/><path d="M12 12l5 6"/></svg></s>Remote Mouse<span class="callout">My app</span></div>
-      <div class="ic"><s></s>Clock</div><div class="ic"><s></s>Weather</div>
-      <div class="ic"><s></s>Music</div><div class="ic"><s></s>Files</div><div class="ic"><s></s>Calendar</div><div class="ic"><s></s>Settings</div>
-     </div>
-     <div class="dock"><s></s><s></s><s></s><s></s></div>
+<!-- 2. Dashboard -->
+<section class="story" id="dashboard" data-bg="#f0f0ee">
+ <div class="stage"><div class="wrap">
+  <div class="rhead">
+   <div><p class="eyebrow">Power BI · Reporting</p><p class="summary">A sample Power BI style report showing the <b>three kinds of reporting</b> I build: sales, shipment tracking and member data quality. Each page has its own filters, headline numbers and charts.</p></div>
+   <div class="auto"><span class="ring" id="ring"></span><span id="autoLabel">Auto-playing pages</span></div>
+  </div>
+  <div class="report-fit" id="rfit"><div class="report-scroll" id="rscroll"><div class="report" id="report">
+   <div class="canvas" id="canvas"></div>
+   <div class="fpane">Filters</div>
+   <div class="tabsbar" role="tablist" id="tabs"></div>
+  </div></div></div>
+  <p class="demo-note">Demo data generated for this portfolio, not from any employer.</p>
+ </div></div>
+</section>
+
+<!-- 3. Automation -->
+<section class="story tall" id="automation" data-bg="#ecf5ef">
+ <div class="stage"><div class="wrap split">
+  <div>
+   <p class="eyebrow">Automation</p>
+   <div class="dqtabs autotabs" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-t="0">Power Automate</button>
+    <button type="button" role="tab" aria-selected="false" data-t="1">Process improvement</button>
+    <button type="button" role="tab" aria-selected="false" data-t="2">Email alerts</button>
+   </div>
+   <div class="ap" data-t="0">
+    <p class="summary">At OTPP, we used <b>AI and Power Automate</b> to build an automated workflow that assembled member letters from rows of data. It <b>saved time</b> on member communications and <b>got letters out faster</b>.</p>
+    <div class="steps"><div><b id="letN">0</b>letters assembled</div></div>
+   </div>
+   <div class="ap" data-t="1" hidden>
+    <p class="summary">At Safetyloop, I <b>mapped 10+ business processes</b> and digitized safety inspection and compliance workflows for construction contractors, replacing manual steps with <b>consistent digital processes</b>.</p>
+    <div class="steps"><div><b id="befN">5</b>steps before</div><div><b id="aftN">5</b>steps after</div></div>
+   </div>
+   <div class="ap" data-t="2" hidden>
+    <p class="summary">At TMU, I built an <b>automated email alert system</b> in Google Macros to track <b>200+ digital certificate expiry dates</b>, removing manual tracking.</p>
+    <div class="steps"><div><b>200+</b>certificates tracked</div><div><b id="alN">0</b>alerts sent in this check</div></div>
+   </div>
+   <div class="hint"><i></i>Hover to scrub · click to replay</div>
+  </div>
+  <div class="play autovis" data-story="automation">
+   <div class="lettersgrid av" data-t="0">
+    <div class="rows" id="rows"><div class="h"><span>Member</span><span>Letter type</span><span>Status</span></div></div>
+    <div class="pile" id="pile"></div>
+   </div>
+   <div class="proc av" data-t="1" hidden>
+    <div class="lane"><span class="lt">Before</span><div class="pills" id="before"></div></div>
+    <div class="lane after"><span class="lt">After</span><div class="pills" id="after"></div></div>
+    <p class="demo-note" style="margin:10px 0 0">Illustration of a typical inspection process.</p>
+   </div>
+   <div class="mailvis av" data-t="2" hidden>
+    <div class="gs">
+     <div class="gs-top"><b>Certificate tracker</b><span>File</span><span>Edit</span><span>Extensions</span><em id="gsStat">Script idle</em></div>
+     <table class="gs-grid" id="gsGrid"></table>
     </div>
-   </div>
-   <div>
-    <p class="eyebrow">Project · Mobile app</p>
-    <h2>Remote mouse app</h2>
-    <p class="lede">A mobile app that turns my phone into a remote control for my iMac's mouse. I built it end to end with Claude Code, from the interface design to the app logic and debugging.</p>
-    <div class="facts">
-     <div><b>What it does</b><span>Moves and clicks the iMac's cursor from the phone</span></div>
-     <div><b>How I built it</b><span>Claude Code for design, logic and debugging</span></div>
-     <div><b>What I learned</b><span>Taking an idea from rough outline to a working app</span></div>
-    </div>
-    <p class="soon">Screenshots coming soon.</p>
+    <div class="inbox" id="inbox"></div>
+    <p class="demo-note" style="margin:8px 0 0">Illustration with made-up certificates.</p>
    </div>
   </div>
- </section>
+ </div></div>
+</section>
 
- <section class="detail" id="more">
-  <p class="eyebrow">More projects</p>
-  <div class="small">
-   <div><h3>Power Automate flows</h3><p>Flows built for continuous improvement projects that took routine, manual steps out of everyday work.</p></div>
-   <div><h3>Mass letter builder</h3><p>Helped develop an automated mass letter template builder at OTPP, alongside AS/400 macros that cut repetitive work.</p></div>
+<!-- 5. App -->
+<section class="story" id="app" data-bg="#f1eff7">
+ <div class="stage"><div class="wrap">
+  <div style="text-align:center;margin-bottom:20px">
+   <p class="eyebrow">Personal projects</p>
+   <h3 class="apptitle">Computer mouse mobile app</h3>
   </div>
- </section>
+  <div class="devices">
+   <div class="phone"><div class="screen"><div class="notch"></div>
+    <div class="home"><div class="apps">
+     <div class="ic"><s></s>Mail</div><div class="ic"><s></s>Notes</div><div class="ic"><s></s>Camera</div><div class="ic"><s></s>Photos</div>
+     <div class="ic"><s></s>Maps</div>
+     <div class="ic hero"><span class="mylabel">My app</span><s><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l12 7-5.5 1.5L9 17z"/><path d="M12 12l5 6"/></svg></s>Remote Mouse</div>
+     <div class="ic"><s></s>Clock</div><div class="ic"><s></s>Weather</div>
+     <div class="ic"><s></s>Music</div><div class="ic"><s></s>Files</div><div class="ic"><s></s>Calendar</div><div class="ic"><s></s>Settings</div>
+    </div></div>
+    <div class="appui"><div class="hd">Remote Mouse<span>● Connected</span></div><div class="pad"><span class="finger"></span></div><div class="btnrow"><i></i><i></i></div></div>
+   </div></div>
+   <div class="imac">
+    <div class="scr"><div class="desk">
+     <div class="win" style="left:8%;top:12%;width:46%;height:46%"></div>
+     <div class="win" style="left:48%;top:38%;width:40%;height:44%"></div>
+     <div class="cursor"><svg viewBox="0 0 24 24"><use href="#ptr"/></svg></div>
+    </div></div>
+    <div class="chin"></div><div class="stand"></div>
+   </div>
+  </div>
+  <div class="facts wrap" style="max-width:560px;grid-template-columns:repeat(2,minmax(0,1fr))">
+   <div><b>Idea to app</b>Rough outline to working product</div>
+   <div><b>Built with</b>Claude Code for design, logic and debugging</div>
+  </div>
+ </div></div>
+</section>
 
- <footer>Chizim Ndu · Toronto · <a href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a></footer>
-</div>
+<section class="wrap contact" id="contact" data-bg="#fbfbfa">
+ <div>
+  <img class="photo" src="img/chizim.jpg" alt="">
+  <p class="summary" style="margin:0 auto">Open to data and business analyst roles in the Greater Toronto Area and remote.</p>
+  <div class="links">
+   <span><svg class="i"><use href="#mail"/></svg>Chizim.Ndu@gmail.com</span>
+   <a href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener"><svg class="i"><use href="#in"/></svg>LinkedIn</a>
+   <a href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#doc"/></svg>Resume (PDF)</a>
+  </div>
+ </div>
+</section>
+<footer>Chizim Ndu · Toronto</footer>
 
 <script src="js/chart.umd.min.js"></script>
 <script>
-document.getElementById('copyMail').onclick=e=>{const b=e.currentTarget;
- navigator.clipboard.writeText('Chizim.Ndu@gmail.com').then(()=>b.textContent='Copied',()=>b.textContent='Select the email above')};
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 
-// ---------- Demo data (seeded, so it's the same on every visit) ----------
+// ---------- Background tint per section ----------
+const secs=[...document.querySelectorAll('[data-bg]')];
+const bgIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.body.style.backgroundColor=e.target.dataset.bg}),{rootMargin:'-45% 0px -45% 0px'});
+secs.forEach(s=>bgIO.observe(s));
+
+// ---------- Looping stories: play on their own, hover to scrub, click to replay ----------
+const stories={};
+function onStory(id,fn){const el=document.getElementById(id),vis=document.querySelector(`[data-story="${id}"]`);
+ const st=stories[id]={fn,start:performance.now(),hover:false,seen:false};
+ new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!st.seen){st.seen=true;st.start=performance.now()}st.inView=e.isIntersecting}),{threshold:.3}).observe(el);
+ vis.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;st.hover=true;const r=vis.getBoundingClientRect();fn(clamp((e.clientX-r.left)/r.width))});
+ vis.addEventListener('pointerleave',()=>{if(!st.hover)return;st.hover=false;st.start=performance.now()-PLAY*0.0});
+ vis.addEventListener('click',()=>{st.hover=false;st.start=performance.now()});
+ fn(RM?1:0)}
+const PLAY=6500,HOLD=2200;
+function loop(now){for(const id in stories){const st=stories[id];if(RM||st.hover||!st.inView)continue;
+ const t=(now-st.start)%(PLAY+HOLD);st.fn(clamp(t/PLAY))}requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+
+// 1. Data quality: three tabs, each with its own animation
+const COLS=['Member ID','Birth date','Address','Service','Salary'];
+const ROWS=[['M-10482','1984-03-12','Toronto, ON','12.5 yrs','$84,200'],['M-10517','1979-11-02','Ottawa, ON','21.0 yrs','$97,850'],['M-10533','1991-06-27','London, ON','6.0 yrs','$71,300'],['M-10561','1986-01-15','Barrie, ON','14.2 yrs','$88,900'],['M-10590','1975-09-30','Kingston, ON','25.8 yrs','$103,400'],['M-10604','1993-04-08','Windsor, ON','4.5 yrs','$66,750'],['M-10628','1982-12-19','Sudbury, ON','17.1 yrs','$91,120']];
+const GAPS=[[0,2],[1,3],[1,4],[2,1],[3,2],[3,4],[4,3],[5,1],[5,2],[6,4],[2,3],[6,2]];
+const ct=document.getElementById('cleanTable');
+ct.innerHTML='<thead><tr>'+COLS.map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+ROWS.map((r,i)=>'<tr>'+r.map((v,j)=>`<td data-g="${GAPS.findIndex(g=>g[0]===i&&g[1]===j)}">${v}</td>`).join('')+'</tr>').join('')+'</tbody>';
+const gapCells=[...ct.querySelectorAll('td')].filter(td=>td.dataset.g!=='-1').sort((a,b)=>a.dataset.g-b.dataset.g);
+const pct=document.getElementById('pct'),pbar=document.getElementById('pctbar');
+function dqPension(p){const k=Math.round(clamp((p-.08)/.8)*gapCells.length);
+ gapCells.forEach((td,i)=>{td.className=i<k?'fixed':'gap'});
+ const v=Math.round(35+clamp((p-.05)/.85)*41);pct.textContent=v+'%';pbar.style.width=v+'%';pct.style.color=v>=75?'var(--accent)':'var(--ink)'}
+
+// Calculation checks (Excel)
+const XR=[['M-10482',12.5,84200,21050],['M-10517',21.0,97850,40297],['M-10533',6.0,71300,8556],['M-10561',14.2,88900,25248],['M-10590',25.8,103400,53354],['M-10604',4.5,66750,6705],['M-10628',17.1,91120,31613],['M-10655',9.3,78400,14582]];
+const money0=n=>'$'+Math.round(n).toLocaleString('en-CA');
+const xg=document.getElementById('xlGrid');
+xg.innerHTML='<thead><tr><th></th>'+['A','B','C','D','E','F','G'].map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
+ '<tr class="hdr"><td class="rn">1</td><td>Member ID</td><td>Service (yrs)</td><td>Salary</td><td>Expected pension</td><td>Amount on file</td><td>Difference</td><td>Status</td></tr>'+
+ XR.map((r,i)=>`<tr data-i="${i}"><td class="rn">${i+2}</td><td>${r[0]}</td><td class="n">${r[1].toFixed(1)}</td><td class="n">${money0(r[2])}</td><td class="n d"></td><td class="n">${money0(r[3])}</td><td class="n f"></td><td class="g"></td></tr>`).join('')+
+ `<tr class="tot"><td class="rn">${XR.length+2}</td><td>Total</td><td></td><td></td><td class="n" id="xlTD"></td><td class="n">${money0(XR.reduce((a,r)=>a+r[3],0))}</td><td class="n" id="xlTF"></td><td id="xlTG"></td></tr></tbody>`;
+const xrows=[...xg.querySelectorAll('tbody tr[data-i]')];
+const xlRef=document.getElementById('xlRef'),xlF=document.getElementById('xlF');
+const mapN=document.getElementById('mapN'),flagN=document.getElementById('flagN');
+function dqPipe(p){const k=Math.floor(clamp((p-.05)/.75)*(XR.length+.999));let bad=0,sd=0,sf=0;
+ xrows.forEach((tr,i)=>{const r=XR[i],exp=r[1]*r[2]*.02,diff=r[3]-exp,done=i<k,mis=Math.abs(diff)>50;
+  tr.querySelector('.d').textContent=done?money0(exp):'';const dr=Math.round(diff);tr.querySelector('.f').textContent=done?(dr<0?'-':'')+money0(Math.abs(dr)):'';
+  tr.querySelector('.g').textContent=done?(mis?'Check':'OK'):'';tr.className=done?(mis?'mis':'ok'):'';tr.classList.toggle('cur',i===k);
+  if(done){sd+=exp;sf+=diff;if(mis)bad++}});
+ const cur=Math.min(k,XR.length-1)+2;
+ if(k<XR.length){xlRef.textContent='D'+cur;xlF.textContent=`=B${cur}*C${cur}*2%`}else{xlRef.textContent='F'+(XR.length+2);xlF.textContent=`=SUM(F2:F${XR.length+1})`}
+ const all=k>=XR.length;document.getElementById('xlTD').textContent=all?money0(sd):'';document.getElementById('xlTF').textContent=all?money0(sf):'';document.getElementById('xlTG').textContent=all?bad+' to check':'';
+ mapN.textContent=Math.min(k,XR.length);flagN.textContent=bad}
+
+// Anomaly checks
+const SQL=[['SELECT','region, month, total_amount'],['FROM','provincial_returns'],['WHERE','ABS(total_amount - avg_amount)'],['','  > 3 * std_dev'],['ORDER BY','total_amount DESC;']];
+const sqlEl=document.getElementById('sql');
+const RES=[['Ontario','2019-08','$96,410','$56,020','+72%'],['Quebec','2019-10','$88,275','$55,940','+58%'],['Manitoba','2019-02','$22,130','$56,310','-61%']];
+const SCANNED=24;
+const rg=document.getElementById('resGrid'),resMsg=document.getElementById('resMsg');
+rg.innerHTML='<thead><tr><th></th><th>region</th><th>month</th><th>total_amount</th><th>avg_amount</th><th>vs_avg</th></tr></thead><tbody>'+RES.map((r,i)=>`<tr data-i="${i}"><td class="rn">${i+1}</td>${r.map((v,j)=>`<td class="${j>=2?'n':''}${j===4?' dev':''}">${v}</td>`).join('')}</tr>`).join('')+'</tbody>';
+const rrows=[...rg.querySelectorAll('tbody tr')];
+const rowN=document.getElementById('rowN'),anN=document.getElementById('anN');
+function dqAnom(p){const q=clamp(p/.45);const chars=Math.floor(q*SQL.reduce((a,l)=>a+l[0].length+l[1].length+2,0));let left=chars,out='';
+ for(const [k,f] of SQL){const line=(k?k+' ':'')+f;const take=line.slice(0,Math.max(0,left));left-=line.length+1;if(!take)break;
+  const kw=k?take.slice(0,Math.min(take.length,k.length)):'';out+=(kw?`<span class="k">${kw}</span>`:'')+take.slice(kw.length)+'\n'}
+ sqlEl.innerHTML=out;
+ const scan=Math.floor(clamp((p-.47)/.2)*SCANNED);const k=Math.floor(clamp((p-.68)/.2)*(RES.length+.999));
+ rrows.forEach((r,i)=>{r.style.visibility=i<k?'visible':'hidden'});
+ resMsg.textContent=p<.45?'Ready':p<.68?'Executing query…':`${Math.min(k,RES.length)} rows returned`;
+ rowN.textContent=scan;anN.textContent=Math.min(k,RES.length)}
+
+const DQ=[dqPipe,dqPension,dqAnom];let dqi=0,dqAuto=true,lastP=0;
+const dqTabs=[...document.querySelectorAll('.dqtabs button')];
+function dqShow(i){dqi=i;dqTabs.forEach((b,j)=>b.setAttribute('aria-selected',j===i));
+ document.querySelectorAll('.dqp').forEach(e=>e.hidden=+e.dataset.t!==i);document.querySelectorAll('.dqv').forEach(e=>e.hidden=+e.dataset.t!==i);
+ lastP=0;if(stories.cleanup)stories.cleanup.start=performance.now();DQ[i](RM?1:0)}
+dqTabs.forEach(b=>b.onclick=()=>{dqAuto=false;dqShow(+b.dataset.t)});
+onStory('cleanup',p=>{const st=stories.cleanup;
+ if(st&&!st.hover&&dqAuto&&!RM&&p<lastP-.5){lastP=0;dqShow((dqi+1)%3);return}
+ lastP=p;DQ[dqi](p);const tb=dqTabs[dqi];tb&&tb.style.setProperty('--t',dqAuto?p:0)});
+
+// 4. Letters
+const LROWS=[['10482','Address update'],['10517','Service confirmation'],['10533','Missing documents'],['10561','Beneficiary review'],['10590','Address update'],['10604','Service confirmation']];
+const rowsEl=document.getElementById('rows'),pile=document.getElementById('pile');
+const rEls=LROWS.map(r=>{const d=document.createElement('div');d.innerHTML=`<span>M-${r[0]}</span><span>${r[1]}</span><span class="st">Queued</span>`;rowsEl.appendChild(d);return d});
+const lEls=LROWS.map((r,i)=>{const d=document.createElement('div');d.className='letter';
+ d.innerHTML=`<div class="lh"><span>Member services</span><i></i></div>Dear member <mark>M-${r[0]}</mark>,<div class="ln"></div>Re: <mark>${r[1]}</mark><div class="ln"></div><div class="ln" style="width:80%"></div><div class="ln"></div><div class="ln" style="width:60%"></div>`;
+ pile.appendChild(d);return d});
+const letN=document.getElementById('letN');
+const LINES=['> RUN MACRO LETTERGEN','  reading member_records…','  merging fields: ID, TYPE','  letters ready: '];
+const autoLetters=p=>{const k=Math.floor(clamp((p-.05)/.8)*(LROWS.length+.999));
+ rEls.forEach((d,i)=>{d.className=i<k?'done':i===k?'now':'';d.querySelector('.st').textContent=i<k?'✓ Sent':i===k?'Merging…':'Queued'});
+ lEls.forEach((d,i)=>{const done=i<k;const off=(k-1-i);
+  d.style.opacity=done?1:0;d.style.transform=done?`translate(${off*-3}px,${off*-6}px) rotate(${(i%2?1:-1)*(2+off)}deg)`:'translate(-60%,20px) rotate(-8deg)'});
+ letN.textContent=Math.min(k,LROWS.length)};
+
+// Process improvement: before and after
+const BEFORE=['Paper checklist on site','Photos on a personal phone','Drive back to the office','Retype into a spreadsheet','Email the report'];
+const AFTER=['Digital checklist on site','Photos attached in the app','Report saved automatically'];
+const bEl=document.getElementById('before'),aEl=document.getElementById('after');
+bEl.innerHTML=BEFORE.map((t,i)=>`<span class="pill2 b">${i+1}. ${t}</span>`).join('<i class="arr">→</i>');
+aEl.innerHTML=AFTER.map((t,i)=>`<span class="pill2 a">${i+1}. ${t}</span>`).join('<i class="arr">→</i>');
+const bP=[...bEl.querySelectorAll('.pill2')],aP=[...aEl.querySelectorAll('.pill2')],aA=[...aEl.querySelectorAll('.arr')];
+const befN=document.getElementById('befN'),aftN=document.getElementById('aftN');
+function autoProc(p){const kb=Math.floor(clamp((p-.05)/.4)*(BEFORE.length+.999));const ka=Math.floor(clamp((p-.5)/.35)*(AFTER.length+.999));
+ bP.forEach((e,i)=>e.classList.toggle('x',i<kb&&i!==0));
+ aP.forEach((e,i)=>e.classList.toggle('in',i<ka));aA.forEach((e,i)=>e.style.opacity=i<ka-1?1:0);
+ befN.textContent=BEFORE.length;aftN.textContent=ka>0?Math.min(ka,AFTER.length):'–'}
+
+// Email alerts for certificate expiry (illustration)
+const CERTS=[['web-portal-01','2026-12-01',66],['vpn-gateway','2026-10-09',13],['mail-relay','2027-03-18',173],['file-share-02','2026-10-02',6],['hr-intranet','2027-01-22',118],['print-server','2026-10-21',25],['api-gateway','2027-05-30',246]];
+const gsG=document.getElementById('gsGrid'),inbox=document.getElementById('inbox'),gsStat=document.getElementById('gsStat'),alN=document.getElementById('alN');
+gsG.innerHTML='<thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead><tbody><tr class="hdr"><td class="rn">1</td><td>Certificate</td><td>Expires</td><td>Days left</td><td>Alert</td></tr>'+
+ CERTS.map((c,i)=>`<tr data-i="${i}"><td class="rn">${i+2}</td><td>${c[0]}</td><td>${c[1]}</td><td class="n">${c[2]}</td><td class="al"></td></tr>`).join('')+'</tbody>';
+const gRows=[...gsG.querySelectorAll('tbody tr[data-i]')];
+const DUE=CERTS.map((c,i)=>c[2]<=30?i:-1).filter(i=>i>=0);
+inbox.innerHTML=DUE.map(i=>`<div class="mail" data-i="${i}"><b>Reminder: ${CERTS[i][0]} expires in ${CERTS[i][2]} days</b><span>Renew before ${CERTS[i][1]} · sent automatically</span></div>`).join('');
+const mails=[...inbox.querySelectorAll('.mail')];
+function autoMail(p){const k=Math.floor(clamp((p-.05)/.7)*(CERTS.length+.999));let sent=0;
+ gRows.forEach((tr,i)=>{const due=CERTS[i][2]<=30,done=i<k;tr.classList.toggle('cur',i===k&&k<CERTS.length);tr.classList.toggle('due',done&&due);
+  tr.querySelector('.al').textContent=done?(due?'Sent':'—'):'';if(done&&due)sent++});
+ mails.forEach((m,j)=>m.classList.toggle('in',j<sent));
+ gsStat.textContent=p<.05?'Script idle':k<CERTS.length?'Running daily check…':'Check complete';alN.textContent=sent}
+
+const AUTO=[autoLetters,autoProc,autoMail];let ai=0,aAuto=true,aLast=0;
+const aTabs=[...document.querySelectorAll('.autotabs button')];
+function aShow(i){ai=i;aTabs.forEach((b,j)=>b.setAttribute('aria-selected',j===i));
+ document.querySelectorAll('.ap').forEach(e=>e.hidden=+e.dataset.t!==i);document.querySelectorAll('.av').forEach(e=>e.hidden=+e.dataset.t!==i);
+ aLast=0;if(stories.automation)stories.automation.start=performance.now();AUTO[i](RM?1:0)}
+aTabs.forEach(b=>b.onclick=()=>{aAuto=false;aShow(+b.dataset.t)});
+onStory('automation',p=>{const st=stories.automation;
+ if(st&&!st.hover&&aAuto&&!RM&&p<aLast-.5){aLast=0;aShow((ai+1)%3);return}
+ aLast=p;AUTO[ai](p);const tb=aTabs[ai];tb&&tb.style.setProperty('--t',aAuto?p:0)});
+
+// ---------- Power BI style report ----------
 let seed=7;const rnd=()=>((seed=(seed*16807)%2147483647)/2147483647);
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const C=['#118dff','#12239e','#e66c37','#6b007b','#e044a7','#744ec2'];
 const fmt=n=>n.toLocaleString('en-CA');
 const money=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
 const sum=a=>a.reduce((x,y)=>x+y,0);
-
-function rows(dims,n,mk){const out=[];for(let i=0;i<n;i++){const r={};for(const k in dims)r[k]=dims[k][Math.floor(rnd()*dims[k].length)];r.m=Math.floor(rnd()*12);out.push(Object.assign(r,mk(r)))}return out}
-
-const cust=rows({region:['Ontario','Quebec','British Columbia','Prairies','Atlantic'],year:['2024','2025'],seg:['Retail','Small business','Enterprise'],ch:['Online','In store','Partner']},2400,
- r=>({rev:(r.seg==='Enterprise'?2600:r.seg==='Small business'?900:180)*(0.6+rnd())*(r.year==='2025'?1.12:1)*(1+r.m/30),churn:rnd()<(r.seg==='Retail'?.11:.06)}));
-const cargo=rows({corr:['Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax'],year:['2024','2025'],cause:['Weather','Equipment','Crew','Congestion','Customs']},3000,
- r=>{const late=rnd()<(r.corr==='Toronto–Vancouver'?.24:.15)+(r.m<2||r.m>10?.08:0)-(r.year==='2025'?.03:0);return{late,hrs:late?2+rnd()*20:0,teu:1+Math.floor(rnd()*4)}});
-const pen=rows({status:['Active','Retired','Deferred'],year:['2024','2025'],ctype:['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'],emp:['School board A','School board B','School board C','School board D','School board E']},2600,
- r=>({complete:rnd()<0.32+r.m*0.034+(r.year==='2025'?0.05:0),open:rnd()<.18,days:2+rnd()*12}));
-
-// ---------- Report pages ----------
+function mk(dims,n,f){const o=[];for(let i=0;i<n;i++){const r={};for(const k in dims)r[k]=dims[k][Math.floor(rnd()*dims[k].length)];r.m=Math.floor(rnd()*12);o.push(Object.assign(r,f(r)))}return o}
+const cust=mk({region:['Ontario','Quebec','British Columbia','Prairies','Atlantic'],year:['2024','2025'],seg:['Retail','Small business','Enterprise'],ch:['Online','In store','Partner']},2400,r=>({rev:(r.seg==='Enterprise'?2600:r.seg==='Small business'?900:180)*(0.6+rnd())*(r.year==='2025'?1.12:1)*(1+r.m/30),churn:rnd()<(r.seg==='Retail'?.11:.06)}));
+const cargo=mk({corr:['Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax'],year:['2024','2025'],cause:['Weather','Equipment','Crew','Congestion','Customs']},3000,r=>{const late=rnd()<(r.corr==='Toronto–Vancouver'?.24:.15)+(r.m<2||r.m>10?.08:0)-(r.year==='2025'?.03:0);return{late,hrs:late?2+rnd()*20:0}});
+const pen=mk({status:['Active','Retired','Deferred'],year:['2024','2025'],ctype:['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'],emp:['School board A','School board B','School board C','School board D','School board E']},2600,r=>({complete:rnd()<0.32+r.m*0.034+(r.year==='2025'?0.05:0),open:rnd()<.18,days:2+rnd()*12}));
+// Each page has its own theme and layout, like separate Power BI report pages
 const PAGES=[
- {id:'cust',name:'Customers',title:'Customer overview',data:cust,
-  slicers:[['region','Region',['All','Ontario','Quebec','British Columbia','Prairies','Atlantic']],['year','Year',['2025','2024']]],
-  cards:d=>{const ids=d.length;return[[fmt(ids),'Customers'],[money(sum(d.map(r=>r.rev))),'Revenue'],[money(sum(d.map(r=>r.rev))/Math.max(ids,1)),'Avg order value'],[(100*d.filter(r=>r.churn).length/Math.max(ids,1)).toFixed(1)+'%','Churn rate']]},
-  visuals:d=>[
-   {w:'w7',t:'Revenue by month',type:'line',labels:MONTHS,sets:[MONTHS.map((_,m)=>Math.round(sum(d.filter(r=>r.m===m).map(r=>r.rev))))],money:true},
-   {w:'w5',t:'Revenue by channel',type:'doughnut',labels:['Online','In store','Partner'],sets:[['Online','In store','Partner'].map(c=>Math.round(sum(d.filter(r=>r.ch===c).map(r=>r.rev))))],money:true},
-   {w:'w5',t:'Revenue by segment',type:'bar',horiz:true,labels:['Enterprise','Small business','Retail'],sets:[['Enterprise','Small business','Retail'].map(s=>Math.round(sum(d.filter(r=>r.seg===s).map(r=>r.rev))))],money:true},
-   {w:'w7',t:'Region summary',table:{head:['Region','Customers','Revenue','Churn'],keys:['Ontario','Quebec','British Columbia','Prairies','Atlantic'],by:'region',
-    cols:g=>[fmt(g.length),money(sum(g.map(r=>r.rev))),(100*g.filter(r=>r.churn).length/Math.max(g.length,1)).toFixed(1)+'%']}}]},
- {id:'cargo',name:'Cargo tracking',title:'Cargo tracking',data:cargo,
-  slicers:[['corr','Corridor',['All','Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax']],['year','Year',['2025','2024']]],
-  cards:d=>{const late=d.filter(r=>r.late);return[[fmt(d.length),'Shipments'],[(100-100*late.length/Math.max(d.length,1)).toFixed(1)+'%','On-time rate'],[(sum(late.map(r=>r.hrs))/Math.max(late.length,1)).toFixed(1)+' h','Avg delay'],[fmt(late.length),'Delayed shipments']]},
-  visuals:d=>[
-   {w:'w7',t:'On-time rate by month (%)',type:'line',labels:MONTHS,sets:[MONTHS.map((_,m)=>{const g=d.filter(r=>r.m===m);return +(100-100*g.filter(r=>r.late).length/Math.max(g.length,1)).toFixed(1)})],target:90},
-   {w:'w5',t:'Delays by cause',type:'bar',horiz:true,labels:['Weather','Equipment','Crew','Congestion','Customs'],sets:[['Weather','Equipment','Crew','Congestion','Customs'].map(c=>d.filter(r=>r.late&&r.cause===c).length)]},
-   {w:'w5',t:'Shipment status',type:'doughnut',labels:['On time','Delayed'],sets:[[d.filter(r=>!r.late).length,d.filter(r=>r.late).length]]},
-   {w:'w7',t:'Corridor performance',table:{head:['Corridor','Shipments','On time','Avg delay'],keys:['Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax'],by:'corr',
-    cols:g=>{const l=g.filter(r=>r.late);return[fmt(g.length),(100-100*l.length/Math.max(g.length,1)).toFixed(1)+'%',(sum(l.map(r=>r.hrs))/Math.max(l.length,1)).toFixed(1)+' h']}}}]},
- {id:'pen',name:'Pension data',title:'Pension member data quality',data:pen,
-  slicers:[['status','Member status',['All','Active','Retired','Deferred']],['year','Year',['2025','2024']]],
-  cards:d=>{const o=d.filter(r=>r.open);return[[fmt(d.length),'Members reviewed'],[(100*d.filter(r=>r.complete).length/Math.max(d.length,1)).toFixed(1)+'%','Data completeness'],[fmt(o.length),'Open cases'],[(sum(d.map(r=>r.days))/Math.max(d.length,1)).toFixed(1)+' days','Avg resolution']]},
-  visuals:d=>[
-   {w:'w7',t:'Data completeness by month vs 75% target (%)',type:'line',labels:MONTHS,sets:[MONTHS.map((_,m)=>{const g=d.filter(r=>r.m===m);return +(100*g.filter(r=>r.complete).length/Math.max(g.length,1)).toFixed(1)})],target:75},
-   {w:'w5',t:'Cases by type',type:'bar',horiz:true,labels:['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'],sets:[['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'].map(c=>d.filter(r=>r.ctype===c).length)]},
-   {w:'w5',t:'Members by status',type:'doughnut',labels:['Active','Retired','Deferred'],sets:[['Active','Retired','Deferred'].map(s=>d.filter(r=>r.status===s).length)]},
-   {w:'w7',t:'Employer summary',table:{head:['Employer','Members','Complete','Open cases'],keys:['School board A','School board B','School board C','School board D','School board E'],by:'emp',
-    cols:g=>[fmt(g.length),(100*g.filter(r=>r.complete).length/Math.max(g.length,1)).toFixed(1)+'%',fmt(g.filter(r=>r.open).length)]}}]}
+ {id:'cust',name:'Sales',theme:'',pal:['#118dff','#12239e','#e66c37','#6b007b','#e044a7'],data:cust,
+  slicers:[['region','Region',['All','Ontario','Quebec','British Columbia','Prairies','Atlantic']],['year','Year',['2025','2024']]]},
+ {id:'cargo',name:'Shipments',theme:'dark',pal:['#3fd0c9','#f2c811','#ff6b5b','#8fa3bf','#7b9cff'],data:cargo,
+  slicers:[['corr','Route',['All','Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax']],['year','Year',['2025','2024']]]},
+ {id:'pen',name:'Data quality',theme:'teal',pal:['#0f7b6c','#7fc8a9','#d9a441','#b5cdc4','#3d5a80'],data:pen,
+  slicers:[['status','Member status',['All','Active','Retired','Deferred']],['year','Year',['2025','2024']]]}
 ];
-
-let page=0,charts=[];const sel={};
+let page=0,charts=[],auto=true,inView=false,t0=performance.now();const sel={};
 PAGES.forEach(p=>{sel[p.id]={};p.slicers.forEach(s=>sel[p.id][s[0]]=s[2][0])});
-const tabs=document.getElementById('tabs');
+const tabs=document.getElementById('tabs'),cv=document.getElementById('canvas'),rep=document.getElementById('report');
 tabs.innerHTML=PAGES.map((p,i)=>`<button role="tab" aria-selected="${i===0}" data-i="${i}">${p.name}</button>`).join('')+'<span class="pg" id="pg"></span>';
-tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{page=+b.dataset.i;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',x===b));render()});
+function go(i){page=i;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',+x.dataset.i===i));cv.classList.add('fade');setTimeout(()=>{render();fitReport();cv.classList.remove('fade')},250)}
+function stopAuto(){auto=false;document.getElementById('autoLabel').textContent='Paused · you are in control';document.getElementById('ring').style.setProperty('--t',1)}
+tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{stopAuto();go(+b.dataset.i)});
 
+const per=(a,b)=>(100*a/Math.max(b,1));
+const slicerHTML=(p,vertical)=>p.slicers.map(([k,l,o])=>`<div class="slicer${vertical?' v':''}"><label>${l}</label><div class="opts">${o.map(v=>`<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${sel[p.id][k]===v}">${v}</button>`).join('')}</div></div>`).join('');
+const card=(v,l,x='')=>`<div class="card ${x}"><div class="v">${v}</div><div class="l">${l}</div></div>`;
+const vis=(cls,t,inner)=>`<div class="vis ${cls}"><h4>${t}</h4>${inner}</div>`;
+const box=(id,h=200)=>`<div class="box" style="height:${h}px"><canvas id="${id}"></canvas></div>`;
+function mix(a,b,t){const h=x=>[1,3,5].map(i=>parseInt(x.slice(i,i+2),16));const A=h(a),B=h(b);return'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')'}
+
+function chart(id,cfg,p){const th=getComputedStyle(rep);const muted=th.getPropertyValue('--pbi-muted').trim(),line=th.getPropertyValue('--pbi-line').trim();
+ Chart.defaults.font.family='"Segoe UI","Open Sans",sans-serif';Chart.defaults.font.size=11;
+ cfg.options=Object.assign({maintainAspectRatio:false,animation:{duration:RM?0:700}},cfg.options||{});
+ const o=cfg.options;o.plugins=Object.assign({legend:{display:false}},o.plugins||{});
+ if(o.plugins.legend.display)o.plugins.legend.labels=Object.assign({color:muted,boxWidth:10},o.plugins.legend.labels||{});
+ if(o.scales)for(const k in o.scales){const s=o.scales[k];s.ticks=Object.assign({color:muted},s.ticks||{});s.grid=Object.assign({color:line},s.grid||{});s.border={display:false}}
+ charts.push(new Chart(document.getElementById(id),cfg))}
+
+const LAYOUT={
+ cust(p,d){const pal=p.pal,s=sel.cust;
+  const rev=sum(d.map(r=>r.rev)),churn=per(d.filter(r=>r.churn).length,d.length);
+  const regs=['Ontario','Quebec','British Columbia','Prairies','Atlantic'];
+  cv.innerHTML=`<div class="rtitle"><h3>Sales overview</h3><small>Demo data · ${s.year}</small></div>
+   <div class="slicers">${slicerHTML(p)}</div>
+   ${card(fmt(d.length),'Customers')}${card(money(rev),'Total sales')}${card(money(rev/Math.max(d.length,1)),'Average sale')}${card(churn.toFixed(1)+'%','Customers lost')}
+   ${vis('w8','Sales by month',box('c1',200))}
+   ${vis('w4','Sales by channel',box('c2',200))}
+   ${vis('w12','Sales by region',`<table class="tbl"><thead><tr><th>Region</th><th>Customers</th><th>Total sales</th><th>Average sale</th><th>Customers lost</th></tr></thead><tbody>${regs.map(r=>{const g=d.filter(x=>x.region===r),v=sum(g.map(x=>x.rev));return`<tr><td>${r}</td><td>${fmt(g.length)}</td><td>${money(v)}</td><td>${money(v/Math.max(g.length,1))}</td><td>${per(g.filter(x=>x.churn).length,g.length).toFixed(1)}%</td></tr>`}).join('')}<tr class="total"><td>Total</td><td>${fmt(d.length)}</td><td>${money(rev)}</td><td>${money(rev/Math.max(d.length,1))}</td><td>${churn.toFixed(1)}%</td></tr></tbody></table>`)}`;
+  if(!window.Chart)return;
+  chart('c1',{type:'bar',data:{labels:MONTHS,datasets:[{data:MONTHS.map((_,m)=>Math.round(sum(d.filter(r=>r.m===m).map(r=>r.rev)))),backgroundColor:pal[0],borderRadius:2}]},options:{scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>money(v)}}},plugins:{tooltip:{callbacks:{label:x=>' '+money(x.raw)}}}}},p);
+  const ch=['Online','In store','Partner'];
+  chart('c2',{type:'doughnut',data:{labels:ch,datasets:[{data:ch.map(c=>Math.round(sum(d.filter(r=>r.ch===c).map(r=>r.rev)))),backgroundColor:pal,borderWidth:1}]},options:{cutout:'60%',plugins:{legend:{display:true,position:'bottom'},tooltip:{callbacks:{label:x=>' '+money(x.raw)}}}}},p);
+ },
+ cargo(p,d){const pal=p.pal,s=sel.cargo;
+  const late=d.filter(r=>r.late),ot=100-per(late.length,d.length);
+  const corr=['Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax'];
+  cv.innerHTML=`<div class="rtitle"><h3>Shipment tracking</h3><small>Demo data · ${s.year}</small></div>
+   <div class="side w3">${slicerHTML(p,true)}${card(fmt(d.length),'Shipments','tall')}${card(ot.toFixed(1)+'%','Delivered on time','tall '+(ot>=85?'good':'warn'))}${card((sum(late.map(r=>r.hrs))/Math.max(late.length,1)).toFixed(1)+' hrs','Average delay','tall')}</div>
+   <div class="w9 stack">
+    ${vis('','Shipments by route',box('g1',200))}
+    <div class="row2">
+     ${vis('','On-time delivery by month (target 85%)',box('g2',170))}
+     ${vis('','Main reasons for delays',box('g3',170))}
+    </div>
+   </div>`;
+  cv.querySelectorAll('.slicer.v .opts').forEach(o=>o.style.flexDirection='column');
+  if(!window.Chart)return;
+  chart('g1',{type:'bar',data:{labels:corr,datasets:[{label:'On time',data:corr.map(c=>d.filter(r=>r.corr===c&&!r.late).length),backgroundColor:pal[0]},{label:'Delayed',data:corr.map(c=>d.filter(r=>r.corr===c&&r.late).length),backgroundColor:pal[2]}]},
+   options:{plugins:{legend:{display:true,position:'top',align:'end'}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true}}}},p);
+  chart('g2',{type:'line',data:{labels:MONTHS,datasets:[{label:'On time %',data:MONTHS.map((_,m)=>{const g=d.filter(r=>r.m===m);return +(100-per(g.filter(r=>r.late).length,g.length)).toFixed(1)}),borderColor:pal[0],backgroundColor:pal[0]+'33',fill:true,tension:.3,pointRadius:2},{label:'Target',data:MONTHS.map(()=>85),borderColor:pal[1],borderDash:[4,4],pointRadius:0,borderWidth:1.5}]},options:{scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>v+'%'}}}}},p);
+  const causes=['Weather','Equipment','Crew','Congestion','Customs'];const cv2=causes.map(c=>late.filter(r=>r.cause===c).length);
+  chart('g3',{type:'bar',data:{labels:causes,datasets:[{data:cv2,backgroundColor:pal[1],borderRadius:2}]},options:{indexAxis:'y',scales:{x:{},y:{grid:{display:false}}}}},p);
+ },
+ pen(p,d){const pal=p.pal,s=sel.pen;
+  const comp=per(d.filter(r=>r.complete).length,d.length);
+  const emps=['School board A','School board B','School board C','School board D','School board E'];
+  cv.innerHTML=`<div class="rtitle banner"><h3>Member data quality</h3><small>Demo data · ${s.year}</small></div>
+   <div class="slicers">${slicerHTML(p)}</div>
+   ${card(fmt(d.length),'Members reviewed')}${card(comp.toFixed(1)+'%','Records complete')}${card(fmt(d.filter(r=>r.open).length),'Open issues')}${card((sum(d.map(r=>r.days))/Math.max(d.length,1)).toFixed(1)+' days','Average time to fix')}
+   ${vis('w7','Records complete by month (target 75%)',box('p1',190))}
+   ${vis('w5','Issues by type',box('p2',190))}
+   ${vis('w12','Summary by school board',`<table class="tbl"><thead><tr><th>School board</th><th>Members</th><th>Records complete</th><th>Open issues</th></tr></thead><tbody>${emps.map(e=>{const g=d.filter(r=>r.emp===e),c=per(g.filter(r=>r.complete).length,g.length);return`<tr><td>${e}</td><td>${fmt(g.length)}</td><td style="color:${c>=75?'#0f7b6c':'#b3541e'};font-weight:600">${c.toFixed(1)}%</td><td>${fmt(g.filter(r=>r.open).length)}</td></tr>`}).join('')}</tbody></table>`)}`;
+  if(!window.Chart)return;
+  chart('p1',{type:'line',data:{labels:MONTHS,datasets:[{label:'Complete %',data:MONTHS.map((_,m)=>{const g=d.filter(r=>r.m===m);return +per(g.filter(r=>r.complete).length,g.length).toFixed(1)}),borderColor:pal[0],backgroundColor:pal[0]+'22',fill:true,tension:.3,pointRadius:2},{label:'Target',data:MONTHS.map(()=>75),borderColor:pal[2],borderDash:[4,4],pointRadius:0,borderWidth:1.5}]},options:{scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>v+'%'}}}}},p);
+  const types=['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'];
+  chart('p2',{type:'bar',data:{labels:types,datasets:[{data:types.map(t=>d.filter(r=>r.ctype===t).length),backgroundColor:pal[1],borderRadius:2}]},options:{indexAxis:'y',scales:{x:{},y:{grid:{display:false}}}}},p);
+ }
+};
 function render(){
- const p=PAGES[page],s=sel[p.id];
- const d=p.data.filter(r=>p.slicers.every(([k])=>s[k]==='All'||r[k]===s[k]));
+ const p=PAGES[page],s=sel[p.id],d=p.data.filter(r=>p.slicers.every(([k])=>s[k]==='All'||r[k]===s[k]));
+ rep.className='report '+p.theme;
  document.getElementById('pg').textContent=`Page ${page+1} of ${PAGES.length}`;
  charts.forEach(c=>c.destroy());charts=[];
- const cv=document.getElementById('canvas');
- cv.innerHTML=`<div class="rtitle"><h3>${p.title}</h3><small>Demo data · ${s.year}</small></div>
-  <div class="slicers">${p.slicers.map(([k,l,o])=>`<div class="slicer"><label>${l}</label><div class="opts">${o.map(v=>`<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${s[k]===v}">${v}</button>`).join('')}</div></div>`).join('')}</div>
-  ${p.cards(d).map(c=>`<div class="card"><div class="v">${c[0]}</div><div class="l">${c[1]}</div></div>`).join('')}
-  ${p.visuals(d).map((v,i)=>`<div class="vis ${v.w}"><h4>${v.t}</h4>${v.table?tableHTML(v.table,d):`<div class="box"><canvas id="v${i}"></canvas></div>`}</div>`).join('')}`;
- cv.querySelectorAll('.slicer button').forEach(b=>b.onclick=()=>{s[b.dataset.k]=b.dataset.v;render()});
- if(!window.Chart)return;
- Chart.defaults.font.family='"Segoe UI","Open Sans",sans-serif';Chart.defaults.font.size=11;Chart.defaults.color='#605e5c';
- p.visuals(d).forEach((v,i)=>{if(v.table)return;
-  const ds=v.sets.map(data=>({data,borderColor:C[0],backgroundColor:v.type==='doughnut'?C:v.type==='line'?'rgba(17,141,255,.12)':C[0],fill:v.type==='line',tension:.25,pointRadius:2,borderWidth:v.type==='doughnut'?1:2,barPercentage:.7}));
-  if(v.target)ds.push({data:MONTHS.map(()=>v.target),type:'line',borderColor:C[2],borderDash:[5,4],pointRadius:0,borderWidth:1.5,fill:false,label:'Target'});
-  charts.push(new Chart(document.getElementById('v'+i),{type:v.type,data:{labels:v.labels,datasets:ds},
-   options:{maintainAspectRatio:false,animation:{duration:300},indexAxis:v.horiz?'y':'x',cutout:'58%',
-    plugins:{legend:{display:v.type==='doughnut',position:'right',labels:{boxWidth:10}},tooltip:{callbacks:{label:x=>' '+(v.money?money(x.raw):fmt(x.raw))}}},
-    scales:v.type==='doughnut'?{}:{x:{grid:{display:!!v.horiz,color:'#edebe9'},ticks:{callback:function(val){const l=this.getLabelForValue(val);return v.horiz?(v.money?money(val):fmt(val)):l}}},
-     y:{grid:{display:!v.horiz,color:'#edebe9'},beginAtZero:!v.target,ticks:{callback:function(val){return v.horiz?this.getLabelForValue(val):(v.money?money(val):fmt(val))}}}}}}));
- });
-}
-function tableHTML(t,d){
- const rows=t.keys.map(k=>`<tr><td>${k}</td>${t.cols(d.filter(r=>r[t.by]===k)).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
- return `<table class="tbl"><thead><tr>${t.head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}<tr class="total"><td>Total</td>${t.cols(d).map(c=>`<td>${c}</td>`).join('')}</tr></tbody></table>`;
+ LAYOUT[p.id](p,d);
+ cv.querySelectorAll('.slicer button').forEach(b=>b.onclick=()=>{stopAuto();s[b.dataset.k]=b.dataset.v;render()});
 }
 render();
+function fitReport(){const f=document.getElementById('rfit'),sc=document.getElementById('rscroll'),st=f.closest('.stage');
+ sc.style.transform='';sc.style.width='';f.style.height='';
+ if(innerWidth<760)return;
+ const head=st.querySelector('.rhead').offsetHeight+st.querySelector('.demo-note').offsetHeight+100;
+ const avail=innerHeight-head,h=sc.offsetHeight,w=f.clientWidth;
+ const k=Math.min(1,avail/h);if(k>=1)return;
+ sc.style.width=(w/k)+'px';sc.style.transform=`scale(${k})`;f.style.height=(sc.offsetHeight*k)+'px'}
+addEventListener('resize',fitReport);setTimeout(fitReport,50);
+new IntersectionObserver(es=>es.forEach(e=>{inView=e.isIntersecting;t0=performance.now()}),{threshold:.35}).observe(document.getElementById('report'));
+const ring=document.getElementById('ring'),DUR=7000;
+(function loop(now){if(auto&&inView&&!RM){const t=(now-t0)/DUR;ring.style.setProperty('--t',t%1);if(t>=1){t0=now;go((page+1)%PAGES.length)}}requestAnimationFrame(loop)})(performance.now());
+document.getElementById('report').addEventListener('pointerenter',()=>{if(auto){t0=performance.now()}});
+
 </script>
 
 </body>
