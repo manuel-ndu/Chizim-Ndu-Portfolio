@@ -101,7 +101,7 @@ h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-
 .hint i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite}
 .play{cursor:pointer}
 .stage>.wrap{min-width:0;width:100%}
-.stage{position:relative;display:grid;align-items:center;padding-block:48px;min-height:100vh;min-height:100svh}
+.stage{position:relative;display:grid;align-items:center;padding-block:44px}
 .split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:center}
 .big{font-size:clamp(56px,8vw,104px);font-weight:900;letter-spacing:-.04em;line-height:.9;font-variant-numeric:tabular-nums;margin:22px 0 4px}
 .big+.cap{font-size:13px;color:var(--muted)}
@@ -275,6 +275,12 @@ h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-
 .mail{background:#fff;border:1px solid var(--rule);border-left:3px solid #188038;border-radius:6px;padding:8px 12px;display:grid;gap:1px;font-size:12px;opacity:0;transform:translateY(8px);transition:all .4s}
 .mail.in{opacity:1;transform:none}
 .mail b{font-size:12.5px}.mail span{color:var(--muted);font-size:11.5px}
+.autovis,.dqvis{display:grid;align-content:center}
+.autovis{min-height:525px}.dqvis{min-height:420px}
+@media (max-width:860px){.autovis,.dqvis{min-height:0}}
+.sect{font-size:clamp(26px,2.6vw,36px);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin:0 0 16px;display:flex;align-items:center;gap:12px}
+.sect:before{content:"";width:6px;height:.9em;border-radius:3px;background:var(--accent);flex:none}
+.sect.center{justify-content:center;margin-bottom:8px}
 .demo-note{font-size:12px;color:var(--muted);margin-top:10px}
 
 /* Flow */
@@ -355,7 +361,7 @@ h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-
 .facts b{display:block;color:var(--ink);font-size:13px}
 
 /* Contact */
-.contact{min-height:80vh;display:grid;place-items:center;text-align:center;padding-block:80px}
+.contact{display:grid;place-items:center;text-align:center;padding-block:56px}
 .contact .photo{margin:0 auto 20px;width:88px;height:88px}
 .contact h2{font-size:clamp(34px,5vw,60px)}
 .contact .links{justify-items:center;margin-top:22px;gap:12px}
@@ -455,7 +461,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 <section class="story tall" id="cleanup" data-bg="#eef3fa">
  <div class="stage"><div class="wrap split">
   <div>
-   <p class="eyebrow">Data quality</p>
+   <h2 class="sect">Data quality</h2>
    <div class="dqtabs" role="tablist">
     <button type="button" role="tab" aria-selected="true" data-t="0">Excel</button>
     <button type="button" role="tab" aria-selected="false" data-t="1">Power BI</button>
@@ -501,7 +507,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 <section class="story" id="dashboard" data-bg="#f0f0ee">
  <div class="stage"><div class="wrap">
   <div class="rhead">
-   <div><p class="eyebrow">Power BI · Reporting</p><p class="summary">A sample Power BI style report showing the <b>three kinds of reporting</b> I build: sales, shipment tracking and member data quality. Each page has its own filters, headline numbers and charts.</p></div>
+   <div><h2 class="sect">Data visualization and reporting</h2><p class="summary">A sample Power BI style report showing the <b>three kinds of reporting</b> I build: sales, shipment tracking and member data quality. Each page has its own filters, headline numbers and charts.</p></div>
    <div class="auto"><span class="ring" id="ring"></span><span id="autoLabel">Auto-playing pages</span></div>
   </div>
   <div class="report-fit" id="rfit"><div class="report-scroll" id="rscroll"><div class="report" id="report">
@@ -517,7 +523,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 <section class="story tall" id="automation" data-bg="#ecf5ef">
  <div class="stage"><div class="wrap split">
   <div>
-   <p class="eyebrow">Automation</p>
+   <h2 class="sect">Automation</h2>
    <div class="dqtabs autotabs" role="tablist">
     <button type="button" role="tab" aria-selected="true" data-t="0">Power Automate</button>
     <button type="button" role="tab" aria-selected="false" data-t="1">Process improvement</button>
@@ -563,7 +569,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 <section class="story" id="app" data-bg="#f1eff7">
  <div class="stage"><div class="wrap">
   <div style="text-align:center;margin-bottom:20px">
-   <p class="eyebrow">Personal projects</p>
+   <h2 class="sect center">Personal projects</h2>
    <h3 class="apptitle">Computer mouse mobile app</h3>
   </div>
   <div class="devices">
