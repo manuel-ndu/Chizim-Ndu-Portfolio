@@ -281,6 +281,15 @@ h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-
 .sect{font-size:clamp(26px,2.6vw,36px);font-weight:900;letter-spacing:-.025em;line-height:1.1;margin:0 0 16px;display:flex;align-items:center;gap:12px}
 .sect:before{content:"";width:6px;height:.9em;border-radius:3px;background:var(--accent);flex:none}
 .sect.center{justify-content:center;margin-bottom:8px}
+.xl-grid td[data-cell],.grid-t td[data-cell]{cursor:pointer}
+.xl-grid td.sel{outline:2px solid #1e6e43;outline-offset:-2px;background:#e8f2ec!important}
+#xlF.isf{color:#1e6e43;font-weight:600}
+.grid-t td.sel{outline:2px solid #f2c811;outline-offset:-2px}
+.dax{border-top:1px solid var(--rule);padding:10px 12px;font-size:12px;color:var(--muted);background:#fbfbfb}
+.dax pre{margin:6px 0 0;font:12px/1.5 var(--mono);color:#1c1f24;white-space:pre-wrap}
+.dax pre:empty{display:none}
+.tapnote{font-size:11.5px;color:var(--muted);margin-top:8px}
+.rtabs{margin:4px 0 16px}
 .demo-note{font-size:12px;color:var(--muted);margin-top:10px}
 
 /* Flow */
@@ -487,12 +496,13 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
    <div class="sheet dqv pbiv" data-t="1" hidden>
     <div class="top"><i></i><i></i><i></i><span><b style="color:#252423">Member records</b> · Power BI table · illustration</span></div>
     <div class="sheet-scroll"><table class="grid-t" id="cleanTable"></table></div>
+    <div class="dax"><div id="daxT">Click any cell to see the DAX measure behind it</div><pre id="daxC"></pre></div>
    </div>
    <div class="xl dqv" data-t="0">
     <div class="xl-ribbon"><b>Pension_Checks.xlsx</b><span>Home</span><span>Insert</span><span>Formulas</span><span>Data</span><span>Review</span></div>
     <div class="xl-fbar"><span class="xl-ref" id="xlRef">D2</span><span class="xl-fx">fx</span><span id="xlF">=B2*C2*2%</span></div>
     <div class="xl-scroll"><table class="xl-grid" id="xlGrid"></table></div>
-    <div class="xl-tabs"><span class="on">Calc check</span><span>Members</span><span>+</span></div>
+    <div class="xl-tabs"><span class="on">Calc check</span><span>Members</span><span>+</span><em style="margin-left:auto;font-style:normal;padding:5px 4px;color:#666">Click a cell to see its formula</em></div>
    </div>
    <div class="sheet dqv" data-t="2" hidden>
     <div class="top"><i></i><i></i><i></i><span>provincial_returns.sql · illustration</span></div>
@@ -507,7 +517,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 <section class="story" id="dashboard" data-bg="#f0f0ee">
  <div class="stage"><div class="wrap">
   <div class="rhead">
-   <div><h2 class="sect">Data visualization and reporting</h2><p class="summary">A sample Power BI style report showing the <b>three kinds of reporting</b> I build: sales, shipment tracking and member data quality. Each page has its own filters, headline numbers and charts.</p></div>
+   <div><h2 class="sect">Data visualization and reporting</h2><div class="dqtabs rtabs" id="rtabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-i="0">Sales</button><button type="button" role="tab" aria-selected="false" data-i="1">Shipments</button><button type="button" role="tab" aria-selected="false" data-i="2">Data quality</button></div><p class="summary">A sample Power BI style report showing the <b>three kinds of reporting</b> I build: sales, shipment tracking and member data quality. Each page has its own filters, headline numbers and charts.</p></div>
    <div class="auto"><span class="ring" id="ring"></span><span id="autoLabel">Auto-playing pages</span></div>
   </div>
   <div class="report-fit" id="rfit"><div class="report-scroll" id="rscroll"><div class="report" id="report">
@@ -627,12 +637,12 @@ const stories={};
 function onStory(id,fn){const el=document.getElementById(id),vis=document.querySelector(`[data-story="${id}"]`);
  const st=stories[id]={fn,start:performance.now(),hover:false,seen:false};
  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!st.seen){st.seen=true;st.start=performance.now()}st.inView=e.isIntersecting}),{threshold:.3}).observe(el);
- vis.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;st.hover=true;const r=vis.getBoundingClientRect();fn(clamp((e.clientX-r.left)/r.width))});
+ vis.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||st.frozen)return;st.hover=true;const r=vis.getBoundingClientRect();fn(clamp((e.clientX-r.left)/r.width))});
  vis.addEventListener('pointerleave',()=>{if(!st.hover)return;st.hover=false;st.start=performance.now()-PLAY*0.0});
- vis.addEventListener('click',()=>{st.hover=false;st.start=performance.now()});
+ vis.addEventListener('click',e=>{if(e.target.closest('[data-cell]'))return;st.frozen=false;st.hover=false;st.start=performance.now()});
  fn(RM?1:0)}
 const PLAY=6500,HOLD=2200;
-function loop(now){for(const id in stories){const st=stories[id];if(RM||st.hover||!st.inView)continue;
+function loop(now){for(const id in stories){const st=stories[id];if(RM||st.hover||st.frozen||!st.inView)continue;
  const t=(now-st.start)%(PLAY+HOLD);st.fn(clamp(t/PLAY))}requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 
@@ -692,10 +702,39 @@ const dqTabs=[...document.querySelectorAll('.dqtabs button')];
 function dqShow(i){dqi=i;dqTabs.forEach((b,j)=>b.setAttribute('aria-selected',j===i));
  document.querySelectorAll('.dqp').forEach(e=>e.hidden=+e.dataset.t!==i);document.querySelectorAll('.dqv').forEach(e=>e.hidden=+e.dataset.t!==i);
  lastP=0;if(stories.cleanup)stories.cleanup.start=performance.now();DQ[i](RM?1:0)}
-dqTabs.forEach(b=>b.onclick=()=>{dqAuto=false;dqShow(+b.dataset.t)});
+dqTabs.forEach(b=>b.onclick=()=>{dqAuto=false;stories.cleanup.frozen=false;dqShow(+b.dataset.t)});
 onStory('cleanup',p=>{const st=stories.cleanup;
  if(st&&!st.hover&&dqAuto&&!RM&&p<lastP-.5){lastP=0;dqShow((dqi+1)%3);return}
  lastP=p;DQ[dqi](p);const tb=dqTabs[dqi];tb&&tb.style.setProperty('--t',dqAuto?p:0)});
+
+
+// ---------- Click-to-inspect: Excel formulas and Power BI DAX ----------
+function freezeDQ(){const st=stories.cleanup;st.frozen=true;st.hover=false;dqAuto=false;dqTabs.forEach(b=>b.style.setProperty('--t',0))}
+const XL_COLS=['A','B','C','D','E','F','G'];
+function xlFormula(col,row){const last=XR.length+1,tot=XR.length+2;
+ if(row===1)return null;
+ if(row===tot)return{D:`=SUM(D2:D${last})`,E:`=SUM(E2:E${last})`,F:`=SUM(F2:F${last})`,G:`=COUNTIF(G2:G${last},"Check")&" to check"`}[col]||null;
+ return{D:`=B${row}*C${row}*2%`,F:`=E${row}-D${row}`,G:`=IF(ABS(F${row})>50,"Check","OK")`}[col]||null}
+xg.querySelectorAll('tbody tr').forEach((tr,ri)=>{[...tr.children].forEach((td,ci)=>{if(ci===0)return;td.dataset.cell=XL_COLS[ci-1]+(ri+1);td.tabIndex=0})});
+function xlPick(td){freezeDQ();dqPipe(1);xg.querySelectorAll('.sel').forEach(e=>e.classList.remove('sel'));td.classList.add('sel');
+ const ref=td.dataset.cell,col=ref[0],row=+ref.slice(1);const f=xlFormula(col,row);
+ xlRef.textContent=ref;xlF.textContent=f||td.textContent;xlF.classList.toggle('isf',!!f)}
+xg.addEventListener('click',e=>{const td=e.target.closest('[data-cell]');if(td){e.stopPropagation();xlPick(td)}});
+xg.addEventListener('keydown',e=>{const td=e.target.closest('[data-cell]');if(td&&(e.key==='Enter'||e.key===' ')){e.preventDefault();xlPick(td)}});
+
+const DAX={
+ 'Member ID':['Total members','Total members =\nCOUNTROWS( Members )'],
+ 'Birth date':['Birth date complete %','Birth date complete % =\nDIVIDE(\n  COUNTROWS( FILTER( Members, NOT ISBLANK( Members[Birth date] ) ) ),\n  [Total members]\n)'],
+ 'Address':['Address complete %','Address complete % =\nDIVIDE(\n  COUNTROWS( FILTER( Members, NOT ISBLANK( Members[Address] ) ) ),\n  [Total members]\n)'],
+ 'Service':['Service complete %','Service complete % =\nDIVIDE(\n  COUNTROWS( FILTER( Members, NOT ISBLANK( Members[Service] ) ) ),\n  [Total members]\n)'],
+ 'Salary':['Salary complete %','Salary complete % =\nDIVIDE(\n  COUNTROWS( FILTER( Members, NOT ISBLANK( Members[Salary] ) ) ),\n  [Total members]\n)']};
+const daxT=document.getElementById('daxT'),daxC=document.getElementById('daxC');
+ct.querySelectorAll('tbody td').forEach((td,i)=>{td.dataset.cell='pbi';td.tabIndex=0});
+function pbiPick(td){freezeDQ();dqPension(1);ct.querySelectorAll('.sel').forEach(e=>e.classList.remove('sel'));td.classList.add('sel');
+ const col=COLS[td.cellIndex];const [name,code]=DAX[col];const was=td.dataset.g!=='-1';
+ daxT.innerHTML=`<b>${name}</b> · ${td.closest('tr').cells[0].textContent} · ${was?'was missing, now fixed':'already complete'}`;daxC.textContent=code}
+ct.addEventListener('click',e=>{const td=e.target.closest('[data-cell]');if(td){e.stopPropagation();pbiPick(td)}});
+ct.addEventListener('keydown',e=>{const td=e.target.closest('[data-cell]');if(td&&(e.key==='Enter'||e.key===' ')){e.preventDefault();pbiPick(td)}});
 
 // 4. Letters
 const LROWS=[['10482','Address update'],['10517','Service confirmation'],['10533','Missing documents'],['10561','Beneficiary review'],['10590','Address update'],['10604','Service confirmation']];
@@ -773,9 +812,10 @@ let page=0,charts=[],auto=true,inView=false,t0=performance.now();const sel={};
 PAGES.forEach(p=>{sel[p.id]={};p.slicers.forEach(s=>sel[p.id][s[0]]=s[2][0])});
 const tabs=document.getElementById('tabs'),cv=document.getElementById('canvas'),rep=document.getElementById('report');
 tabs.innerHTML=PAGES.map((p,i)=>`<button role="tab" aria-selected="${i===0}" data-i="${i}">${p.name}</button>`).join('')+'<span class="pg" id="pg"></span>';
-function go(i){page=i;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',+x.dataset.i===i));cv.classList.add('fade');setTimeout(()=>{render();fitReport();cv.classList.remove('fade')},250)}
-function stopAuto(){auto=false;document.getElementById('autoLabel').textContent='Paused · you are in control';document.getElementById('ring').style.setProperty('--t',1)}
+function go(i){page=i;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',+x.dataset.i===i));document.querySelectorAll('#rtabs button').forEach(x=>x.setAttribute('aria-selected',+x.dataset.i===i));cv.classList.add('fade');setTimeout(()=>{render();fitReport();cv.classList.remove('fade')},250)}
+function stopAuto(){auto=false;document.querySelectorAll('#rtabs button').forEach(b=>b.style.setProperty('--t',0));document.getElementById('autoLabel').textContent='Paused · you are in control';document.getElementById('ring').style.setProperty('--t',1)}
 tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{stopAuto();go(+b.dataset.i)});
+document.querySelectorAll('#rtabs button').forEach(b=>b.onclick=()=>{stopAuto();go(+b.dataset.i)});
 
 const per=(a,b)=>(100*a/Math.max(b,1));
 const slicerHTML=(p,vertical)=>p.slicers.map(([k,l,o])=>`<div class="slicer${vertical?' v':''}"><label>${l}</label><div class="opts">${o.map(v=>`<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${sel[p.id][k]===v}">${v}</button>`).join('')}</div></div>`).join('');
@@ -861,7 +901,7 @@ function fitReport(){const f=document.getElementById('rfit'),sc=document.getElem
 addEventListener('resize',fitReport);setTimeout(fitReport,50);
 new IntersectionObserver(es=>es.forEach(e=>{inView=e.isIntersecting;t0=performance.now()}),{threshold:.35}).observe(document.getElementById('report'));
 const ring=document.getElementById('ring'),DUR=7000;
-(function loop(now){if(auto&&inView&&!RM){const t=(now-t0)/DUR;ring.style.setProperty('--t',t%1);if(t>=1){t0=now;go((page+1)%PAGES.length)}}requestAnimationFrame(loop)})(performance.now());
+(function loop(now){if(auto&&inView&&!RM){const t=(now-t0)/DUR;ring.style.setProperty('--t',t%1);const rb=document.querySelector('#rtabs button[aria-selected="true"]');rb&&rb.style.setProperty('--t',t%1);if(t>=1){t0=now;go((page+1)%PAGES.length)}}requestAnimationFrame(loop)})(performance.now());
 document.getElementById('report').addEventListener('pointerenter',()=>{if(auto){t0=performance.now()}});
 
 </script>
