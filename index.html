@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chizim Ndu, Toronto data and business analyst. SQL, Power BI, Python and automation.">
+<title>Chizim Ndu Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a one-screen analytics report. Header bar, then a 12-column grid of tiles: profile + KPIs, live TTC chart + insights, work table + projects, skills strip. */
+:root{
+ --canvas:#e9edf1; --tile:#ffffff; --ink:#14202b; --muted:#5d6b78; --rule:#d5dce3;
+ --teal:#0d7a72; --teal-soft:#d9efec; --amber:#c9801a; --amber-soft:#f6e7cf;
+ --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+ --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --canvas:#0f151b; --tile:#17202a; --ink:#e4ebf1; --muted:#93a3b2; --rule:#26323e;
+ --teal:#3fc1b4; --teal-soft:#16302f; --amber:#e9a64a; --amber-soft:#33281a; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --canvas:#0f151b; --tile:#17202a; --ink:#e4ebf1; --muted:#93a3b2; --rule:#26323e;
+ --teal:#3fc1b4; --teal-soft:#16302f; --amber:#e9a64a; --amber-soft:#33281a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;margin:0;
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 32px}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.report{max-width:1180px;margin:0 auto}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-block:16px;border-bottom:1px solid var(--rule);margin-bottom:16px}
+.bar .t{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bar .t b{color:var(--ink);font-weight:500}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--teal);margin-right:6px;vertical-align:1px}
+.preview{background:var(--amber-soft);color:var(--ink);font-size:13px;padding:8px 12px;border-radius:6px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.tile{background:var(--tile);border:1px solid var(--rule);border-radius:6px;padding:18px;min-width:0}
+.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.s5{grid-column:span 5}.s7{grid-column:span 7}.s8{grid-column:span 8}.s4{grid-column:span 4}.s12{grid-column:span 12}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.4vw,48px);line-height:1;letter-spacing:-.02em;margin:4px 0 8px;text-wrap:balance}
+.role{font-weight:600;color:var(--teal);margin:0 0 10px}
+.pitch{color:var(--muted);margin:0 0 16px;max-width:46ch}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:600 14px var(--body);padding:9px 14px;border-radius:5px;border:1px solid var(--rule);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
+.btn.main{background:var(--teal);border-color:var(--teal);color:var(--tile)}
+.btn:hover{border-color:var(--teal)}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;height:100%}
+.kpi{border-left:3px solid var(--teal);padding:2px 0 2px 12px}
+.kpi:nth-child(even){border-color:var(--amber)}
+.kpi .n{font-family:var(--display);font-weight:800;font-size:38px;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:13px;color:var(--muted)}
+.kpi .src{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+.chead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.chead h2{font-family:var(--display);font-size:20px;margin:0}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:12px 0}
+.tabs button{font:500 13px var(--body);padding:6px 11px;border-radius:4px;border:1px solid var(--rule);background:transparent;color:var(--muted);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--tile)}
+.chartbox{position:relative;height:270px}
+.minis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.mini{background:var(--canvas);border-radius:5px;padding:10px 12px}
+.mini b{display:block;font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
+.mini span{font-size:12px;color:var(--muted)}
+.ins{margin:0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:6px}
+.meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 8px 8px 0;border-bottom:1px solid var(--rule)}
+td{padding:10px 8px 10px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--teal-soft)}
+td .org{color:var(--muted);font-size:13px}
+td.yr{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+tr.det td{color:var(--muted);font-size:13px;padding-top:0}
+tr.det ul{margin:0;padding-left:18px}
+.chev{font-family:var(--mono);color:var(--teal)}
+.projs{display:grid;gap:12px}
+.proj{border-bottom:1px solid var(--rule);padding-bottom:12px}
+.proj:last-child{border:0;padding-bottom:0}
+.proj h3{font-size:15px;margin:0 0 2px}
+.proj p{margin:0 0 6px;color:var(--muted);font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:3px;background:var(--teal-soft);color:var(--teal)}
+.tag.a{background:var(--amber-soft);color:var(--amber)}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.contact .mail{font-family:var(--mono);font-size:14px;user-select:all}
+@media (max-width:860px){.s5,.s7,.s8,.s4{grid-column:span 12}.skills{grid-template-columns:1fr}}
+@media (max-width:420px){.kpi .n{font-size:30px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="report">
+ <div class="bar">
+  <span class="t"><b>Chizim Ndu</b> · Analyst portfolio</span>
+  <span class="t"><span class="dot"></span>Toronto · Open to work</span>
+ </div>
+ <div class="preview" id="previewNote" hidden>Preview: the TTC chart shows sample numbers. The live site loads the City of Toronto's real data.</div>
+
+ <div class="grid">
+  <section class="tile s5">
+   <p class="lbl">Profile</p>
+   <h1>Chizim Ndu</h1>
+   <p class="role">Data and Business Analyst</p>
+   <p class="pitch">4+ years turning messy data into clear reporting and lasting automation across pension, rail, construction software and government.</p>
+   <div class="actions">
+    <a class="btn main" href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <a class="btn" href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a>
+    <button class="btn" id="copyMail" type="button">Copy email</button>
+   </div>
+  </section>
+
+  <section class="tile s7">
+   <div class="kpis">
+    <div class="kpi"><div class="n">40%+</div><div class="d">Member data completeness raised</div><div class="src">OTPP</div></div>
+    <div class="kpi"><div class="n">10%</div><div class="d">Fewer cargo delays from KPI dashboards</div><div class="src">CN</div></div>
+    <div class="kpi"><div class="n">50+</div><div class="d">System issues resolved with developers</div><div class="src">Safetyloop</div></div>
+    <div class="kpi"><div class="n">20/day</div><div class="d">Data discrepancy cases resolved</div><div class="src">OTPP</div></div>
+   </div>
+  </section>
+
+  <section class="tile s8" id="ttc">
+   <div class="chead"><h2>TTC subway delays</h2><span class="lbl" id="ttcPeriod" style="margin:0">Last 12 months</span></div>
+   <div class="tabs" role="group" aria-label="Chart view">
+    <button type="button" data-k="monthly" aria-pressed="true">By month</button>
+    <button type="button" data-k="stations" aria-pressed="false">Worst stations</button>
+    <button type="button" data-k="hours" aria-pressed="false">Time of day</button>
+    <button type="button" data-k="by_line" aria-pressed="false">By line</button>
+   </div>
+   <div class="chartbox"><canvas id="ttcChart" aria-label="TTC delay chart"></canvas></div>
+  </section>
+
+  <section class="tile s4">
+   <p class="lbl">What the data says</p>
+   <div class="minis" id="ttcKpis">
+    <div class="mini"><b>…</b><span>delay incidents</span></div><div class="mini"><b>…</b><span>hours lost</span></div>
+    <div class="mini"><b>…</b><span>average delay</span></div><div class="mini"><b>…</b><span>worst station</span></div>
+   </div>
+   <ul class="ins" id="ttcIns"><li>Charts load from the latest weekly refresh.</li></ul>
+   <p class="meta" id="ttcMeta">Python + pandas · refreshed weekly by GitHub Actions · <a href="analysis/ttc_delays.py" target="_blank" rel="noopener">code</a></p>
+  </section>
+
+  <section class="tile s7">
+   <p class="lbl">Work · tap a row</p>
+   <table>
+    <thead><tr><th>Role</th><th>Key result</th><th>Years</th></tr></thead>
+    <tbody id="jobs"></tbody>
+   </table>
+  </section>
+
+  <section class="tile s5">
+   <p class="lbl">Projects</p>
+   <div class="projs">
+    <div class="proj"><h3>TTC delay dashboard</h3><p>The chart on this page. Pulls open data, cleans it and republishes itself every week.</p><div class="tags"><span class="tag">Python</span><span class="tag">GitHub Actions</span><span class="tag">Chart.js</span></div></div>
+    <div class="proj"><h3>Remote mouse app</h3><p>Phone app that controls an iMac's mouse, built end to end with Claude Code.</p><div class="tags"><span class="tag a">Claude Code</span><span class="tag a">App build</span></div></div>
+    <div class="proj"><h3>Power Automate flows</h3><p>Automated routine steps for continuous improvement projects.</p><div class="tags"><span class="tag">Power Automate</span></div></div>
+    <div class="proj"><h3>Mass letter builder</h3><p>Helped build an automated letter template builder and AS/400 macros at OTPP.</p><div class="tags"><span class="tag a">AS/400</span><span class="tag a">Automation</span></div></div>
+   </div>
+  </section>
+
+  <section class="tile s12">
+   <div class="skills">
+    <div><p class="lbl">Data</p><div class="tags"><span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">Python</span><span class="tag">Snowflake</span><span class="tag">Excel VBA</span><span class="tag">AS/400</span></div></div>
+    <div><p class="lbl">Tools</p><div class="tags"><span class="tag a">Power Automate</span><span class="tag a">Jira</span><span class="tag a">Confluence</span><span class="tag a">SharePoint</span><span class="tag a">Azure</span><span class="tag a">Claude</span><span class="tag a">Copilot</span></div></div>
+    <div><p class="lbl">Ways of working</p><div class="tags"><span class="tag">Requirements</span><span class="tag">Process mapping</span><span class="tag">UAT</span><span class="tag">Root cause analysis</span></div></div>
+   </div>
+  </section>
+
+  <section class="tile s12 contact">
+   <div><p class="lbl" style="margin:0 0 4px">Contact</p><span class="mail">Chizim.Ndu@gmail.com</span></div>
+   <div class="actions"><a class="btn main" href="mailto:Chizim.Ndu@gmail.com">Email me</a><a class="btn" href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a></div>
+  </section>
+ </div>
+</div>
+
+<script src="js/chart.umd.min.js"></script>
+<script>
+const JOBS=[
+ ["Pension Data Analyst","Ontario Teachers' Pension Plan","Raised data completeness 40%+, hit 75% KPI early","2024–26",["Resolved up to 20 discrepancy and calculation cases a day with AS/400 and SQL","Built Power BI dashboards and scorecards for data integrity","Built AS/400 macros and helped build a mass letter builder"]],
+ ["Business Systems Specialist","Safetyloop","Digitized safety inspection workflows for contractors","2022–24",["Mapped 10+ business processes","Supported UAT and A/B testing","Resolved 50+ issues in Jira with developers"]],
+ ["Data Analyst","CN Rail","Freight KPI dashboards cut cargo delays 10%+","2021",["Power Query and DAX across multiple source systems","Weekly findings to senior management","Supported a Snowflake pipeline build"]],
+ ["System Programmer / Analyst","Toronto Metropolitan University","Automated alerts for 200+ certificate expiries","2021",["Digital intake form cut processing time up to 30%"]],
+ ["Data Analyst","Canada Revenue Agency","Excel VBA dashboard replaced a paid BI tool","2019–20",["Daily SQL on provincial datasets to find trends and anomalies"]]
+];
+const tb=document.getElementById('jobs');
+JOBS.forEach(j=>{
+ const r=document.createElement('tr');r.className='row';r.tabIndex=0;
+ r.innerHTML=`<td><b>${j[0]}</b><div class="org">${j[1]}</div></td><td>${j[2]} <span class="chev">+</span></td><td class="yr">${j[3]}</td>`;
+ const d=document.createElement('tr');d.className='det';d.hidden=true;
+ d.innerHTML=`<td colspan="3"><ul>${j[4].map(x=>`<li>${x}</li>`).join('')}</ul></td>`;
+ const t=()=>{d.hidden=!d.hidden;r.querySelector('.chev').textContent=d.hidden?'+':'−'};
+ r.onclick=t;r.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}};
+ tb.append(r,d);
+});
+document.getElementById('copyMail').onclick=e=>{
+ const b=e.currentTarget;
+ navigator.clipboard.writeText('Chizim.Ndu@gmail.com').then(()=>{b.textContent='Copied'},()=>{b.textContent='Chizim.Ndu@gmail.com'});
+};
+
+const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let chart,data,view='monthly';
+const V={
+ monthly:d=>({t:'line',l:d.monthly.labels,v:d.monthly.minutes}),
+ stations:d=>({t:'bar',l:d.stations.labels,v:d.stations.minutes,h:true}),
+ hours:d=>({t:'bar',l:d.hours.labels,v:d.hours.minutes}),
+ by_line:d=>({t:'bar',l:d.by_line.labels,v:d.by_line.minutes,h:true})
+};
+function draw(){
+ if(!data||!window.Chart)return;
+ const v=V[view](data),teal=tok('--teal'),amber=tok('--amber'),rule=tok('--rule'),muted=tok('--muted');
+ const font={family:tok('--mono').split(',')[0].replace(/"/g,''),size:11};
+ if(chart)chart.destroy();
+ const max=Math.max(...v.v);
+ chart=new Chart(document.getElementById('ttcChart'),{type:v.t,
+  data:{labels:v.l,datasets:[{data:v.v,borderColor:teal,borderWidth:2,tension:.3,fill:v.t==='line',
+   backgroundColor:v.t==='line'?teal+'26':v.v.map(x=>x===max?amber:teal),borderRadius:3,
+   pointRadius:v.v.map((x,i)=>i===v.v.length-1?4:0),pointBackgroundColor:amber}]},
+  options:{indexAxis:v.h?'y':'x',maintainAspectRatio:false,animation:{duration:400},
+   plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>' '+x.raw.toLocaleString()+' delay minutes'}}},
+   scales:{x:{grid:{color:rule},ticks:{color:muted,font}},y:{beginAtZero:true,grid:{color:rule},ticks:{color:muted,font}}}}});
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));view=b.dataset.k;draw()});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+fetch('data/ttc_summary.json').then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
+ data=d;const k=d.kpis;
+ if(d.sample)document.getElementById('previewNote').hidden=false;
+ document.getElementById('ttcPeriod').textContent=d.period;
+ document.getElementById('ttcKpis').innerHTML=[[k.incidents.toLocaleString(),'delay incidents'],[k.hours_lost.toLocaleString(),'hours lost'],[k.avg_delay+' min','average delay'],[k.top_station,'worst station']].map(x=>`<div class="mini"><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+ document.getElementById('ttcIns').innerHTML=d.insights.map(i=>`<li>${i}</li>`).join('');
+ document.getElementById('ttcMeta').insertAdjacentHTML('afterbegin','Updated '+d.updated+' · ');
+ draw();
+}).catch(()=>{document.querySelector('#ttc .chartbox').innerHTML='<p class="ins" style="list-style:none;padding:0">The chart appears after the first weekly data refresh.</p>'});
+</script>
+
+</body>
+</html>
