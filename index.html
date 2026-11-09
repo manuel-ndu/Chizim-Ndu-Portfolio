@@ -49,7 +49,7 @@ h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-
 .photo{width:112px;height:112px;border-radius:50%;object-fit:cover;display:block;box-shadow:0 0 0 4px var(--bg),0 0 0 6px var(--accent);margin:4px 0 16px}
 .name{font-size:32px;font-weight:900;line-height:1;letter-spacing:-.03em;margin:0 0 6px}
 .title{font-weight:600;color:var(--accent);margin:0 0 12px;font-size:15px}
-.intro{font-size:14.5px;line-height:1.5;margin:0;max-width:26ch;color:var(--ink)}
+.intro{font-size:14px;line-height:1.5;margin:0;max-width:30ch;color:var(--ink)}
 .pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);padding:5px 10px;border-radius:99px}
 .pill i{width:7px;height:7px;border-radius:50%;background:var(--good);animation:blink 1.8s infinite}
 @keyframes blink{50%{opacity:.3}}
@@ -290,6 +290,46 @@ h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;letter-spacing:-.025em;line-
 .dax pre:empty{display:none}
 .tapnote{font-size:11.5px;color:var(--muted);margin-top:8px}
 .rtabs{margin:4px 0 16px}
+.pp.games{margin-top:56px}
+.ppnote{text-align:center;color:var(--muted);font-size:15px;margin:0 auto 16px;max-width:52ch}
+.gwrap{width:min(480px,100%,calc(100vh - 390px));min-width:min(320px,100%);margin:0 auto}
+
+.g-card{background:#fff;border:1px solid var(--rule);border-radius:16px;box-shadow:0 14px 40px rgba(60,40,100,.12);overflow:hidden;position:relative}
+.g-hud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.g-hud div{padding:10px 14px;border-left:1px solid var(--rule)}.g-hud div:first-child{border-left:0}
+.g-hud b{display:block;font-size:24px;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.1}
+.g-hud span{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.g-timer{height:5px;background:var(--rule)}.g-timer i{display:block;height:100%;background:#0b6e4f;width:100%;transition:width .25s linear}.g-timer i.g-low{background:#c8553d}
+.g-board{display:grid;gap:8px;padding:16px;aspect-ratio:1;max-width:100%;transition:background .3s}
+.g-cell{border:0;background:#f6f5fa;border-radius:12px;cursor:pointer;display:grid;place-items:center;padding:12%;transition:transform .12s;min-width:0;min-height:0}
+.g-cell:hover{transform:scale(1.05)}.g-cell:active{transform:scale(.94)}
+.g-cell:focus-visible{outline:3px solid #0b6e4f}
+.g-cell svg{width:100%;height:100%;display:block}
+.g-cell.g-right{animation:gpop .35s}.g-cell.g-wrong{animation:gshake .3s}
+.g-board.g-flash{animation:gflash .4s}
+@keyframes gpop{50%{transform:scale(1.2)}}
+@keyframes gshake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes gflash{50%{background:#fde7e3}}
+.g-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 16px;font-size:12px;color:var(--muted);background:#fbfbfd;border-top:1px solid var(--rule)}
+.g-hud div{position:relative}
+.g-combo{position:absolute;right:10px;top:12px;font-style:normal;font-size:11px;font-weight:800;padding:2px 7px;border-radius:99px;background:var(--rule);color:var(--muted);transition:all .2s}
+.g-combo.g-hot{background:#c9801a;color:#fff;transform:scale(1.1)}
+.g-pop{position:absolute;transform:translate(-50%,-50%);font:900 16px "Public Sans",system-ui,sans-serif;color:#0b6e4f;pointer-events:none;animation:grise .9s forwards;z-index:3;white-space:nowrap;text-shadow:0 1px 0 #fff}
+.g-pop.g-pc{color:#c9801a;font-size:18px}.g-pop.g-bonus{color:#2f6fde;font-size:15px}
+@keyframes grise{to{transform:translate(-50%,-160%);opacity:0}}
+.g-over{position:absolute;inset:0;background:rgba(255,255,255,.95);display:grid;place-items:center;text-align:center;padding:24px;z-index:4}
+.g-over h3{font-size:28px;font-weight:900;margin:0 0 6px;letter-spacing:-.02em}
+.g-over p{color:var(--muted);margin:0 0 8px}
+.g-demo{display:flex;gap:10px;justify-content:center;margin:14px 0 20px}
+.g-demo span{width:48px;height:48px;border-radius:10px;background:#f6f5fa;display:grid;place-items:center}
+.g-demo span.g-odd{box-shadow:0 0 0 3px #0b6e4f}
+.g-btn{font:700 15px "Public Sans",system-ui,sans-serif;padding:12px 26px;border-radius:8px;border:0;background:#0b6e4f;color:#fff;cursor:pointer}
+.g-big{font-size:64px;font-weight:900;line-height:1;letter-spacing:-.03em;color:#0b6e4f;font-variant-numeric:tabular-nums}
+.g-stats{display:flex;gap:28px;justify-content:center;margin:14px 0 20px}
+.g-stats b{display:block;font-size:22px;font-weight:800}.g-stats span{font-size:12px;color:var(--muted)}
+.g-over p.g-rank{font-weight:700;color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
 .demo-note{font-size:12px;color:var(--muted);margin-top:10px}
 
 /* Flow */
@@ -414,7 +454,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
    <img class="photo" src="img/chizim.jpg" alt="Chizim Ndu">
    <h1 class="name">Chizim Ndu</h1>
    <p class="title">Data and Business Analyst</p>
-   <p class="intro">4+ years turning pension, rail, construction software and government data into clear reporting and automation.</p>
+   <p class="intro">Data and business analyst with over 4 years of experience in data analysis, reporting and automation across pension, construction software, logistics and public sector environments.</p>
   </div>
   <div class="col">
    <p class="eyebrow">Experience</p>
@@ -449,6 +489,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
     <li><a href="#automation"><span class="ico"><svg class="i"><use href="#iflow"/></svg></span><span><b>Letter workflow</b><span>AI and Power Automate</span></span></a></li>
     <li><a href="#automation"><span class="ico"><svg class="i"><use href="#letter"/></svg></span><span><b>Email alerts</b><span>Certificate expiry tracking</span></span></a></li>
     <li><a href="#app"><span class="ico"><svg class="i"><use href="#phone"/></svg></span><span><b>Remote mouse app</b><span>Built with Claude Code</span></span></a></li>
+    <li><a href="#app"><span class="ico"><svg class="i"><use href="#spark"/></svg></span><span><b>Mobile games</b><span>Spot the Outlier</span></span></a></li>
    </ul>
   </div>
   <div class="col">
@@ -490,7 +531,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
     <p class="summary">At the Canada Revenue Agency, I <b>queried large provincial datasets daily using SQL</b> to identify trends, anomalies and discrepancies in financial records.</p>
     <div class="duo"><div><b class="big sm" id="rowN">0</b><span class="cap">months scanned</span></div><div><b class="big sm warn" id="anN">0</b><span class="cap">anomalies flagged</span></div></div>
    </div>
-   <div class="hint"><i></i>Hover to scrub · click to replay</div>
+   <div class="hint"><i></i>Hover over the visual to step through it · click to restart</div>
   </div>
   <div class="play dqvis" data-story="cleanup">
    <div class="sheet dqv pbiv" data-t="1" hidden>
@@ -544,14 +585,14 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
     <div class="steps"><div><b id="letN">0</b>letters assembled</div></div>
    </div>
    <div class="ap" data-t="1" hidden>
-    <p class="summary">At Safetyloop, I <b>mapped 10+ business processes</b> and digitized safety inspection and compliance workflows for construction contractors, replacing manual steps with <b>consistent digital processes</b>.</p>
+    <p class="summary">At Safetyloop, TMU and OTPP, I <b>mapped processes and replaced manual steps with consistent digital ones</b>. That included 10+ business processes at Safetyloop and a digital intake form at TMU that <b>cut processing time by up to 30%</b>.</p>
     <div class="steps"><div><b id="befN">5</b>steps before</div><div><b id="aftN">5</b>steps after</div></div>
    </div>
    <div class="ap" data-t="2" hidden>
     <p class="summary">At TMU, I built an <b>automated email alert system</b> in Google Macros to track <b>200+ digital certificate expiry dates</b>, removing manual tracking.</p>
     <div class="steps"><div><b>200+</b>certificates tracked</div><div><b id="alN">0</b>alerts sent in this check</div></div>
    </div>
-   <div class="hint"><i></i>Hover to scrub · click to replay</div>
+   <div class="hint"><i></i>Hover over the visual to step through it · click to restart</div>
   </div>
   <div class="play autovis" data-story="automation">
    <div class="lettersgrid av" data-t="0">
@@ -580,8 +621,10 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
  <div class="stage"><div class="wrap">
   <div style="text-align:center;margin-bottom:20px">
    <h2 class="sect center">Personal projects</h2>
-   <h3 class="apptitle">Computer mouse mobile app</h3>
+
   </div>
+  <div class="pp">
+  <h3 class="apptitle" style="text-align:center;margin-bottom:16px">Computer mouse mobile app</h3>
   <div class="devices">
    <div class="phone"><div class="screen"><div class="notch"></div>
     <div class="home"><div class="apps">
@@ -605,6 +648,42 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
   <div class="facts wrap" style="max-width:560px;grid-template-columns:repeat(2,minmax(0,1fr))">
    <div><b>Idea to app</b>Rough outline to working product</div>
    <div><b>Built with</b>Claude Code for design, logic and debugging</div>
+  </div>
+  </div>
+  <div class="pp games">
+   <h3 class="apptitle" style="text-align:center;margin-bottom:6px">Mobile games</h3>
+   <p class="ppnote">Simple games I design and build. Play a round of <b>Spot the Outlier</b>: tap the one shape that doesn't fit before 60 seconds run out.</p>
+   <div class="gwrap">
+<div class="g-card" id="o-card">
+  <div class="g-hud">
+   <div><span>Score</span><b id="o-score">0</b></div>
+   <div><span>Level</span><b id="o-level">1</b><em class="g-combo" id="o-comboB">×1</em></div>
+   <div><span>Time</span><b id="o-time">60</b></div>
+   <div><span>Best</span><b id="o-best">0</b></div>
+  </div>
+  <div class="g-timer"><i id="o-bar"></i></div>
+  <div class="g-board" id="o-board"></div>
+  <div class="g-foot"><span>Quick finds build a combo · every 5 levels +5 seconds · wrong tap −3 seconds</span><span id="o-hintTxt"></span></div>
+  <div class="g-over" id="o-start">
+   <div>
+    <h3>Find the odd one out</h3>
+    <p>It could be a different colour, shape, size or direction.</p>
+    <div class="g-demo" id="o-demo"></div>
+    <button class="g-btn" id="o-go" type="button">Start</button>
+   </div>
+  </div>
+  <div class="g-over" id="o-end" hidden>
+   <div>
+    <p>Time's up</p>
+    <div class="g-big" id="o-final">0</div>
+    <p class="g-rank" id="o-rank"></p>
+    <div class="g-stats"><div><b id="o-lv">1</b><span>level reached</span></div><div><b id="o-acc">0%</b><span>accuracy</span></div><div><b id="o-mc">×1</b><span>best combo</span></div><div><b id="o-fast">–</b><span>fastest find</span></div></div>
+    <button class="g-btn" id="o-again" type="button">Play again</button>
+   </div>
+  </div>
+ </div>
+
+   </div>
   </div>
  </div></div>
 </section>
@@ -904,6 +983,68 @@ const ring=document.getElementById('ring'),DUR=7000;
 (function loop(now){if(auto&&inView&&!RM){const t=(now-t0)/DUR;ring.style.setProperty('--t',t%1);const rb=document.querySelector('#rtabs button[aria-selected="true"]');rb&&rb.style.setProperty('--t',t%1);if(t>=1){t0=now;go((page+1)%PAGES.length)}}requestAnimationFrame(loop)})(performance.now());
 document.getElementById('report').addEventListener('pointerenter',()=>{if(auto){t0=performance.now()}});
 
+
+// Personal projects tabs
+// Spot the Outlier game
+(function(){
+
+const SHAPES={
+ circle:'<circle cx="50" cy="50" r="42"/>',
+ square:'<rect x="10" y="10" width="80" height="80" rx="12"/>',
+ triangle:'<path d="M50 8 L92 88 H8 Z"/>',
+ diamond:'<path d="M50 6 L94 50 L50 94 L6 50 Z"/>',
+ hexagon:'<path d="M27 10 H73 L96 50 L73 90 H27 L4 50 Z"/>',
+ star:'<path d="M50 5 L61 37 L95 38 L68 58 L78 92 L50 72 L22 92 L32 58 L5 38 L39 37 Z"/>'};
+const KEYS=Object.keys(SHAPES);
+const svg=(s,c,tf='')=>`<svg viewBox="0 0 100 100"><g fill="${c}" ${tf?`transform="${tf}"`:''}>${SHAPES[s]}</g></svg>`;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const $=id=>document.getElementById(id);
+let score=0,level=1,time=60,tick=null,playing=false,taps=0,hits=0,fastest=Infinity,shownAt=0,combo=1,maxCombo=1,lastHit=0;
+let best=0;try{best=+localStorage.getItem('sto-best')||0}catch(e){}$('o-best').textContent=best;
+
+function round(){
+ const n=Math.min(2+Math.floor((level+1)/2),6);          // grid grows from 2x2 up to 6x6
+ const h=Math.floor(Math.random()*360),sat=65,l=(h>200&&h<290)?60:52;
+ const diff=Math.max(12,32-level*1.3);                      // colour gap shrinks each level
+ let kind='colour';
+ if(level>2){const r=Math.random();kind=r<.45?'colour':r<.65?'shape':r<.85?'size':'turn'}
+ let base=pick(KEYS);if(kind==='turn')base=pick(['triangle','star']);
+ let odd=base;if(kind==='shape')while(odd===base)odd=pick(KEYS);
+ const c=`hsl(${h} ${sat}% ${l}%)`,oc=kind==='colour'?`hsl(${h} ${sat}% ${l+(Math.random()<.5?diff:-diff)}%)`:c;
+ const sc=Math.max(.78,.86-level*.003);
+ const tf=kind==='size'?`translate(50 50) scale(${sc}) translate(-50 -50)`:kind==='turn'?'rotate(180 50 50)':'';
+ const k=Math.floor(Math.random()*n*n);
+ const b=$('o-board');b.style.gridTemplateColumns=`repeat(${n},minmax(0,1fr))`;
+ b.innerHTML=Array.from({length:n*n},(_,i)=>`<button class="g-cell" type="button" data-o="${i===k?1:0}" aria-label="shape ${i+1}">${i===k?svg(odd,oc,tf):svg(base,c)}</button>`).join('');
+ $('o-hintTxt').textContent=playing?{colour:'Look at the colour',shape:'Look at the shape',size:'Look at the size',turn:'Look at which way it points'}[kind]:'';
+ $('o-level').textContent=level;shownAt=performance.now()}
+function pop(el,txt,cls){const r=el.getBoundingClientRect(),c=$('o-card').getBoundingClientRect();const p=document.createElement('div');p.className='g-pop '+(cls||'');p.textContent=txt;
+ p.style.left=(r.left-c.left+r.width/2)+'px';p.style.top=(r.top-c.top+r.height/2)+'px';$('o-card').appendChild(p);setTimeout(()=>p.remove(),900)}
+
+$('o-board').addEventListener('click',e=>{const c=e.target.closest('.g-cell');if(!c||!playing)return;taps++;
+ if(c.dataset.o==='1'){hits++;const t=(performance.now()-shownAt)/1000;fastest=Math.min(fastest,t);
+  const now=performance.now();combo=(now-lastHit<1600&&lastHit)?Math.min(combo+1,5):1;lastHit=now;maxCombo=Math.max(maxCombo,combo);
+  const pts=(level*10+Math.max(0,Math.round((3-t)*5)))*combo;score+=pts;$('o-score').textContent=score;c.classList.add('g-right');
+  pop(c,combo>1?`+${pts}  ×${combo} combo`:`+${pts}`,combo>1?'g-pc':'');
+  $('o-comboB').textContent='×'+combo;$('o-comboB').classList.toggle('g-hot',combo>1);
+  level++;if(level%5===0){time+=5;upd();setTimeout(()=>pop($('o-bar'),'+5 seconds','g-bonus'),150)}
+  setTimeout(round,180)}
+ else{time=Math.max(0,time-3);combo=1;lastHit=0;$('o-comboB').textContent='×1';$('o-comboB').classList.remove('g-hot');c.classList.add('g-wrong');const b=$('o-board');b.classList.remove('g-flash');void b.offsetWidth;b.classList.add('g-flash');setTimeout(()=>c.classList.remove('g-wrong'),300);upd();if(time<=0)end()}});
+
+function upd(){$('o-time').textContent=time;$('o-bar').style.width=Math.min(100,time/60*100)+'%';$('o-bar').classList.toggle('g-low',time<=10)}
+function start(){score=0;level=1;time=60;taps=0;hits=0;fastest=Infinity;combo=1;maxCombo=1;lastHit=0;$('o-comboB').textContent='×1';$('o-comboB').classList.remove('g-hot');playing=true;$('o-score').textContent=0;upd();
+ $('o-start').hidden=true;$('o-end').hidden=true;round();clearInterval(tick);tick=setInterval(()=>{time--;upd();if(time<=0)end()},1000)}
+function end(){if(!playing)return;playing=false;clearInterval(tick);
+ const o=document.querySelector('.g-cell[data-o="1"]');if(o)o.style.boxShadow='0 0 0 4px #0b6e4f';
+ if(score>best){best=score;try{localStorage.setItem('sto-best',best)}catch(e){}}$('o-best').textContent=best;
+ $('o-final').textContent=score;$('o-lv').textContent=level;$('o-acc').textContent=(taps?Math.round(hits/taps*100):0)+'%';$('o-mc').textContent='×'+maxCombo;$('o-fast').textContent=fastest<Infinity?fastest.toFixed(2)+'s':'–';
+ $('o-rank').textContent=level>=22?'Eagle eye. Nothing gets past you.':level>=15?'Great eye for detail.':level>=9?'Nice work. Go again?':'Warm-up done. Try again?';
+ setTimeout(()=>{$('o-end').hidden=false},700)}
+$('o-go').onclick=start;$('o-again').onclick=start;
+$('o-demo').innerHTML=[0,0,1,0].map(o=>`<span class="${o?'g-odd':''}">${svg('circle',o?'hsl(200 65% 70%)':'hsl(200 65% 55%)').replace('<svg','<svg width="32" height="32"')}</span>`).join('');
+round();
+
+})();
 </script>
 
 </body>
