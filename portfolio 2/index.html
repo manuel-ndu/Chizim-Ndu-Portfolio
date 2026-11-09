@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chizim Ndu, Toronto data and business analyst. SQL, Power BI, Python and automation.">
+<title>Chizim Ndu Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one-screen overview in 5 columns, then detail sections below: a Power BI style report, the app on a phone, smaller projects. Single light theme to match Power BI. */
+:root{
+ --paper:#fbfbfa; --ink:#1c1f24; --muted:#636a74; --rule:#e2e4e7; --accent:#0b6e4f;
+ --pbi-canvas:#eaeaea; --pbi-tile:#ffffff; --pbi-ink:#252423; --pbi-muted:#605e5c; --pbi-line:#edebe9; --pbi-tab:#f3f2f1; --pbi-gold:#f2c811;
+ --c1:#118dff; --c2:#12239e; --c3:#e66c37; --c4:#6b007b; --c5:#e044a7;
+ --site:"Public Sans",system-ui,sans-serif;
+ --pbi:"Segoe UI","Open Sans",system-ui,sans-serif;
+ color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--site);font-size:14px;line-height:1.5}
+.wrap{max-width:1320px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h2{font-size:22px;letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+
+/* Overview */
+.overview{padding-block:28px 36px;border-bottom:1px solid var(--rule)}
+.cols{display:grid;grid-template-columns:1.25fr 1.2fr 1fr 1fr 1fr;gap:0}
+.col{padding:4px 20px;border-left:1px solid var(--rule);min-width:0}
+.col:first-child{border-left:0;padding-left:0}
+.col:last-child{padding-right:0}
+.name{font-size:30px;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:0 0 4px}
+.title{font-weight:600;color:var(--accent);margin:0 0 10px}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-bottom:10px}
+.status i{width:7px;height:7px;border-radius:50%;background:#2fa36b;display:inline-block}
+.col p{margin:0 0 10px}
+.jobs,.plist{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.jobs b,.plist b{display:block;font-size:13.5px}
+.jobs span{display:block;font-size:12.5px;color:var(--muted)}
+.jobs em{font-style:normal;font-size:12.5px}
+.yr{font-variant-numeric:tabular-nums}
+.sk{margin-bottom:12px}
+.sk h4{font-size:12px;margin:0 0 4px;color:var(--muted);font-weight:600}
+.sk p{margin:0;font-size:13px}
+.plist a{text-decoration:none;color:var(--ink)}
+.plist a:hover b{color:var(--accent)}
+.plist span{display:block;font-size:12.5px;color:var(--muted)}
+.edu{margin-bottom:18px}
+.edu b{display:block}
+.edu span{font-size:12.5px;color:var(--muted)}
+.mail{font-size:13px;user-select:all;word-break:break-all;display:block;margin-bottom:10px}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+.btn{font:600 13px var(--site);padding:7px 12px;border-radius:4px;border:1px solid var(--rule);background:#fff;color:var(--ink);text-decoration:none;cursor:pointer}
+.btn.main{background:var(--accent);border-color:var(--accent);color:#fff}
+.more{margin-top:22px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+
+/* Sections */
+section.detail{padding-block:44px;border-bottom:1px solid var(--rule)}
+.lede{color:var(--muted);margin:0 0 18px;max-width:70ch}
+
+/* Power BI style report */
+.report-scroll{overflow-x:auto;border:1px solid #c8c6c4;border-radius:2px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.report{min-width:960px;background:var(--pbi-canvas);font-family:var(--pbi);color:var(--pbi-ink);display:grid;grid-template-columns:1fr 26px}
+.canvas{padding:14px;display:grid;gap:10px;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(0,auto)}
+.rtitle{grid-column:span 12;display:flex;justify-content:space-between;align-items:center;background:var(--pbi-tile);padding:10px 14px;border-radius:2px}
+.rtitle h3{margin:0;font-size:18px;font-weight:600}
+.rtitle small{color:var(--pbi-muted);font-size:11px}
+.slicers{grid-column:span 12;display:flex;gap:10px;flex-wrap:wrap}
+.slicer{background:var(--pbi-tile);padding:8px 12px;border-radius:2px;display:flex;align-items:center;gap:10px}
+.slicer label{font-size:11px;color:var(--pbi-muted);font-weight:600}
+.slicer .opts{display:flex;gap:4px;flex-wrap:wrap}
+.slicer button{font:12px var(--pbi);border:1px solid #c8c6c4;background:#fff;color:var(--pbi-ink);padding:3px 9px;cursor:pointer;border-radius:1px}
+.slicer button[aria-pressed="true"]{background:var(--pbi-ink);border-color:var(--pbi-ink);color:#fff}
+.card{grid-column:span 3;background:var(--pbi-tile);padding:12px 14px;border-radius:2px;text-align:center}
+.card .v{font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15}
+.card .l{font-size:12px;color:var(--pbi-muted)}
+.vis{background:var(--pbi-tile);padding:10px 12px;border-radius:2px;min-width:0}
+.vis h4{margin:0 0 6px;font-size:13px;font-weight:600}
+.vis .box{position:relative;height:210px}
+.w7{grid-column:span 7}.w5{grid-column:span 5}.w4{grid-column:span 4}.w8{grid-column:span 8}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.tbl th{text-align:left;font-weight:600;border-bottom:2px solid var(--pbi-line);padding:5px 6px}
+.tbl td{padding:5px 6px;border-bottom:1px solid var(--pbi-line)}
+.tbl td:not(:first-child),.tbl th:not(:first-child){text-align:right}
+.tbl tr.total td{font-weight:700;border-top:2px solid var(--pbi-line)}
+.fpane{background:var(--pbi-tile);border-left:1px solid #c8c6c4;writing-mode:vertical-rl;font-size:12px;color:var(--pbi-muted);padding:12px 0;text-align:center;letter-spacing:.04em}
+.tabsbar{grid-column:1 / -1;display:flex;align-items:flex-end;gap:2px;background:var(--pbi-tab);border-top:1px solid #c8c6c4;padding:0 10px;font-family:var(--pbi)}
+.tabsbar button{font:13px var(--pbi);border:0;background:transparent;color:var(--pbi-muted);padding:8px 14px 6px;cursor:pointer;border-bottom:3px solid transparent}
+.tabsbar button[aria-selected="true"]{color:var(--pbi-ink);background:#fff;border-bottom-color:var(--pbi-gold);font-weight:600}
+.tabsbar .pg{margin-left:auto;font-size:11px;color:var(--pbi-muted);padding:8px 0}
+.demo-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* Phone prop */
+.app{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.phone{width:250px;height:510px;border-radius:40px;background:#111;padding:11px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.screen{height:100%;border-radius:30px;background:linear-gradient(160deg,#cfe3dc,#e8e1d3 55%,#d7d9e8);position:relative;overflow:hidden;padding:30px 16px 0}
+.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:84px;height:22px;background:#111;border-radius:12px}
+.sbar{position:absolute;top:10px;left:22px;font-size:11px;font-weight:700;color:#1c1f24}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 10px;margin-top:18px}
+.ic{display:grid;justify-items:center;gap:3px;font-size:9px;color:#2b2f36}
+.ic s{display:block;width:44px;height:44px;border-radius:11px;background:rgba(255,255,255,.65);text-decoration:none}
+.ic.hero s{background:#0b6e4f;display:grid;place-items:center;box-shadow:0 0 0 3px #fff,0 0 0 6px #0b6e4f}
+.ic.hero svg{width:24px;height:24px}
+.ic.hero{font-weight:700;color:#0b6e4f}
+.dock{position:absolute;left:12px;right:12px;bottom:12px;height:64px;border-radius:22px;background:rgba(255,255,255,.45);display:flex;justify-content:space-around;align-items:center}
+.dock s{width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.7)}
+.ic.hero{position:relative}
+.callout{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1c1f24;color:#fff;font-size:10px;padding:4px 8px;border-radius:4px;white-space:nowrap}
+.callout:after{content:"";position:absolute;bottom:-5px;left:50%;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#1c1f24}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.facts div{border-top:2px solid var(--accent);padding-top:8px}
+.facts b{display:block;font-size:13px}
+.facts span{font-size:13px;color:var(--muted)}
+.soon{font-size:12px;color:var(--muted);margin-top:16px}
+
+.small{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.small h3{font-size:16px;margin:0 0 4px}
+.small p{margin:0;color:var(--muted)}
+footer{padding-block:28px 40px;color:var(--muted);font-size:12px}
+
+@media (max-width:1100px){.cols{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:24px}.col:nth-child(4){border-left:0;padding-left:0}}
+@media (max-width:700px){.cols{grid-template-columns:1fr}.col{border-left:0;padding:0 0 18px;border-bottom:1px solid var(--rule)}.col:last-child{border-bottom:0}.app{grid-template-columns:1fr;justify-items:center;gap:28px}.facts,.small{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+ <div class="overview">
+  <div class="cols">
+   <div class="col">
+    <p class="eyebrow">Summary</p>
+    <h1 class="name">Chizim Ndu</h1>
+    <p class="title">Data and Business Analyst</p>
+    <span class="status"><i></i>Toronto · Open to work</span>
+    <p>4+ years turning messy data into clear reporting and automation that lasts, across pension, rail, construction software and government.</p>
+    <p>Raised member data completeness by over 40% at Ontario Teachers' Pension Plan and built freight KPI dashboards at CN that helped cut cargo delays by over 10%.</p>
+   </div>
+   <div class="col">
+    <p class="eyebrow">Work experience</p>
+    <ul class="jobs">
+     <li><b>Pension Data Analyst</b><span>Ontario Teachers' Pension Plan · <span class="yr" style="display:inline">2024–2026</span></span><em>Data completeness up 40%+</em></li>
+     <li><b>Business Systems Specialist</b><span>Safetyloop · <span class="yr" style="display:inline">2022–2024</span></span><em>Digitized safety inspection workflows</em></li>
+     <li><b>Data Analyst</b><span>CN Rail · <span class="yr" style="display:inline">2021</span></span><em>Cargo delays down 10%+</em></li>
+     <li><b>System Programmer / Analyst</b><span>Toronto Metropolitan University · <span class="yr" style="display:inline">2021</span></span><em>Alerts for 200+ certificates</em></li>
+     <li><b>Data Analyst</b><span>Canada Revenue Agency · <span class="yr" style="display:inline">2019–2020</span></span><em>VBA dashboard replaced a paid tool</em></li>
+    </ul>
+   </div>
+   <div class="col">
+    <p class="eyebrow">Skills</p>
+    <div class="sk"><h4>Data</h4><p>SQL, Power BI (DAX, Power Query), Python, Snowflake, Advanced Excel (VBA, macros), AS/400</p></div>
+    <div class="sk"><h4>Tools</h4><p>Power Automate, Jira, Confluence, SharePoint, Azure, Claude, Copilot</p></div>
+    <div class="sk"><h4>Ways of working</h4><p>Requirements gathering, process mapping, UAT, root cause analysis, stakeholder updates</p></div>
+   </div>
+   <div class="col">
+    <p class="eyebrow">Projects</p>
+    <ul class="plist">
+     <li><a href="#dashboard"><b>Power BI dashboards ↓</b><span>Customer, cargo and pension reports</span></a></li>
+     <li><a href="#app"><b>Remote mouse app ↓</b><span>Mobile app built with Claude Code</span></a></li>
+     <li><a href="#more"><b>Power Automate flows ↓</b><span>Automation for improvement projects</span></a></li>
+     <li><a href="#more"><b>Mass letter builder ↓</b><span>AS/400 macros and letter automation</span></a></li>
+    </ul>
+   </div>
+   <div class="col">
+    <p class="eyebrow">Education</p>
+    <div class="edu"><b>Bachelor of Commerce</b><span>Business / Information Technology Management<br>Toronto Metropolitan University</span></div>
+    <p class="eyebrow">Contact</p>
+    <span class="mail">Chizim.Ndu@gmail.com</span>
+    <div class="btns">
+     <a class="btn main" href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+     <a class="btn" href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a>
+     <button class="btn" type="button" id="copyMail">Copy email</button>
+    </div>
+   </div>
+  </div>
+  <div class="more">Scroll for project details ↓</div>
+ </div>
+
+ <section class="detail" id="dashboard">
+  <p class="eyebrow">Project · Power BI</p>
+  <h2>Analytics report</h2>
+  <p class="lede">A three-page report in the style I build in Power BI. Switch pages with the tabs at the bottom and filter with the slicers.</p>
+  <div class="report-scroll">
+   <div class="report" id="report">
+    <div class="canvas" id="canvas"></div>
+    <div class="fpane">Filters</div>
+    <div class="tabsbar" role="tablist" id="tabs"></div>
+   </div>
+  </div>
+  <p class="demo-note">All figures are demo data generated for this portfolio. They are not from any employer.</p>
+ </section>
+
+ <section class="detail" id="app">
+  <div class="app">
+   <div class="phone" aria-label="Phone home screen showing the Remote Mouse app">
+    <div class="screen">
+     <div class="notch"></div><span class="sbar">9:41</span>
+     <div class="apps">
+      <div class="ic"><s></s>Mail</div><div class="ic"><s></s>Notes</div><div class="ic"><s></s>Camera</div><div class="ic"><s></s>Photos</div>
+      <div class="ic"><s></s>Maps</div>
+      <div class="ic hero"><s><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l12 7-5.5 1.5L9 17z"/><path d="M12 12l5 6"/></svg></s>Remote Mouse<span class="callout">My app</span></div>
+      <div class="ic"><s></s>Clock</div><div class="ic"><s></s>Weather</div>
+      <div class="ic"><s></s>Music</div><div class="ic"><s></s>Files</div><div class="ic"><s></s>Calendar</div><div class="ic"><s></s>Settings</div>
+     </div>
+     <div class="dock"><s></s><s></s><s></s><s></s></div>
+    </div>
+   </div>
+   <div>
+    <p class="eyebrow">Project · Mobile app</p>
+    <h2>Remote mouse app</h2>
+    <p class="lede">A mobile app that turns my phone into a remote control for my iMac's mouse. I built it end to end with Claude Code, from the interface design to the app logic and debugging.</p>
+    <div class="facts">
+     <div><b>What it does</b><span>Moves and clicks the iMac's cursor from the phone</span></div>
+     <div><b>How I built it</b><span>Claude Code for design, logic and debugging</span></div>
+     <div><b>What I learned</b><span>Taking an idea from rough outline to a working app</span></div>
+    </div>
+    <p class="soon">Screenshots coming soon.</p>
+   </div>
+  </div>
+ </section>
+
+ <section class="detail" id="more">
+  <p class="eyebrow">More projects</p>
+  <div class="small">
+   <div><h3>Power Automate flows</h3><p>Flows built for continuous improvement projects that took routine, manual steps out of everyday work.</p></div>
+   <div><h3>Mass letter builder</h3><p>Helped develop an automated mass letter template builder at OTPP, alongside AS/400 macros that cut repetitive work.</p></div>
+  </div>
+ </section>
+
+ <footer>Chizim Ndu · Toronto · <a href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a></footer>
+</div>
+
+<script src="js/chart.umd.min.js"></script>
+<script>
+document.getElementById('copyMail').onclick=e=>{const b=e.currentTarget;
+ navigator.clipboard.writeText('Chizim.Ndu@gmail.com').then(()=>b.textContent='Copied',()=>b.textContent='Select the email above')};
+
+// ---------- Demo data (seeded, so it's the same on every visit) ----------
+let seed=7;const rnd=()=>((seed=(seed*16807)%2147483647)/2147483647);
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const C=['#118dff','#12239e','#e66c37','#6b007b','#e044a7','#744ec2'];
+const fmt=n=>n.toLocaleString('en-CA');
+const money=n=>n>=1e6?'$'+(n/1e6).toFixed(1)+'M':n>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n);
+const sum=a=>a.reduce((x,y)=>x+y,0);
+
+function rows(dims,n,mk){const out=[];for(let i=0;i<n;i++){const r={};for(const k in dims)r[k]=dims[k][Math.floor(rnd()*dims[k].length)];r.m=Math.floor(rnd()*12);out.push(Object.assign(r,mk(r)))}return out}
+
+const cust=rows({region:['Ontario','Quebec','British Columbia','Prairies','Atlantic'],year:['2024','2025'],seg:['Retail','Small business','Enterprise'],ch:['Online','In store','Partner']},2400,
+ r=>({rev:(r.seg==='Enterprise'?2600:r.seg==='Small business'?900:180)*(0.6+rnd())*(r.year==='2025'?1.12:1)*(1+r.m/30),churn:rnd()<(r.seg==='Retail'?.11:.06)}));
+const cargo=rows({corr:['Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax'],year:['2024','2025'],cause:['Weather','Equipment','Crew','Congestion','Customs']},3000,
+ r=>{const late=rnd()<(r.corr==='Toronto–Vancouver'?.24:.15)+(r.m<2||r.m>10?.08:0)-(r.year==='2025'?.03:0);return{late,hrs:late?2+rnd()*20:0,teu:1+Math.floor(rnd()*4)}});
+const pen=rows({status:['Active','Retired','Deferred'],year:['2024','2025'],ctype:['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'],emp:['School board A','School board B','School board C','School board D','School board E']},2600,
+ r=>({complete:rnd()<0.32+r.m*0.034+(r.year==='2025'?0.05:0),open:rnd()<.18,days:2+rnd()*12}));
+
+// ---------- Report pages ----------
+const PAGES=[
+ {id:'cust',name:'Customers',title:'Customer overview',data:cust,
+  slicers:[['region','Region',['All','Ontario','Quebec','British Columbia','Prairies','Atlantic']],['year','Year',['2025','2024']]],
+  cards:d=>{const ids=d.length;return[[fmt(ids),'Customers'],[money(sum(d.map(r=>r.rev))),'Revenue'],[money(sum(d.map(r=>r.rev))/Math.max(ids,1)),'Avg order value'],[(100*d.filter(r=>r.churn).length/Math.max(ids,1)).toFixed(1)+'%','Churn rate']]},
+  visuals:d=>[
+   {w:'w7',t:'Revenue by month',type:'line',labels:MONTHS,sets:[MONTHS.map((_,m)=>Math.round(sum(d.filter(r=>r.m===m).map(r=>r.rev))))],money:true},
+   {w:'w5',t:'Revenue by channel',type:'doughnut',labels:['Online','In store','Partner'],sets:[['Online','In store','Partner'].map(c=>Math.round(sum(d.filter(r=>r.ch===c).map(r=>r.rev))))],money:true},
+   {w:'w5',t:'Revenue by segment',type:'bar',horiz:true,labels:['Enterprise','Small business','Retail'],sets:[['Enterprise','Small business','Retail'].map(s=>Math.round(sum(d.filter(r=>r.seg===s).map(r=>r.rev))))],money:true},
+   {w:'w7',t:'Region summary',table:{head:['Region','Customers','Revenue','Churn'],keys:['Ontario','Quebec','British Columbia','Prairies','Atlantic'],by:'region',
+    cols:g=>[fmt(g.length),money(sum(g.map(r=>r.rev))),(100*g.filter(r=>r.churn).length/Math.max(g.length,1)).toFixed(1)+'%']}}]},
+ {id:'cargo',name:'Cargo tracking',title:'Cargo tracking',data:cargo,
+  slicers:[['corr','Corridor',['All','Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax']],['year','Year',['2025','2024']]],
+  cards:d=>{const late=d.filter(r=>r.late);return[[fmt(d.length),'Shipments'],[(100-100*late.length/Math.max(d.length,1)).toFixed(1)+'%','On-time rate'],[(sum(late.map(r=>r.hrs))/Math.max(late.length,1)).toFixed(1)+' h','Avg delay'],[fmt(late.length),'Delayed shipments']]},
+  visuals:d=>[
+   {w:'w7',t:'On-time rate by month (%)',type:'line',labels:MONTHS,sets:[MONTHS.map((_,m)=>{const g=d.filter(r=>r.m===m);return +(100-100*g.filter(r=>r.late).length/Math.max(g.length,1)).toFixed(1)})],target:90},
+   {w:'w5',t:'Delays by cause',type:'bar',horiz:true,labels:['Weather','Equipment','Crew','Congestion','Customs'],sets:[['Weather','Equipment','Crew','Congestion','Customs'].map(c=>d.filter(r=>r.late&&r.cause===c).length)]},
+   {w:'w5',t:'Shipment status',type:'doughnut',labels:['On time','Delayed'],sets:[[d.filter(r=>!r.late).length,d.filter(r=>r.late).length]]},
+   {w:'w7',t:'Corridor performance',table:{head:['Corridor','Shipments','On time','Avg delay'],keys:['Toronto–Montreal','Toronto–Vancouver','Toronto–Chicago','Montreal–Halifax'],by:'corr',
+    cols:g=>{const l=g.filter(r=>r.late);return[fmt(g.length),(100-100*l.length/Math.max(g.length,1)).toFixed(1)+'%',(sum(l.map(r=>r.hrs))/Math.max(l.length,1)).toFixed(1)+' h']}}}]},
+ {id:'pen',name:'Pension data',title:'Pension member data quality',data:pen,
+  slicers:[['status','Member status',['All','Active','Retired','Deferred']],['year','Year',['2025','2024']]],
+  cards:d=>{const o=d.filter(r=>r.open);return[[fmt(d.length),'Members reviewed'],[(100*d.filter(r=>r.complete).length/Math.max(d.length,1)).toFixed(1)+'%','Data completeness'],[fmt(o.length),'Open cases'],[(sum(d.map(r=>r.days))/Math.max(d.length,1)).toFixed(1)+' days','Avg resolution']]},
+  visuals:d=>[
+   {w:'w7',t:'Data completeness by month vs 75% target (%)',type:'line',labels:MONTHS,sets:[MONTHS.map((_,m)=>{const g=d.filter(r=>r.m===m);return +(100*g.filter(r=>r.complete).length/Math.max(g.length,1)).toFixed(1)})],target:75},
+   {w:'w5',t:'Cases by type',type:'bar',horiz:true,labels:['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'],sets:[['Address update','Service gap','Salary mismatch','Beneficiary','Calculation error'].map(c=>d.filter(r=>r.ctype===c).length)]},
+   {w:'w5',t:'Members by status',type:'doughnut',labels:['Active','Retired','Deferred'],sets:[['Active','Retired','Deferred'].map(s=>d.filter(r=>r.status===s).length)]},
+   {w:'w7',t:'Employer summary',table:{head:['Employer','Members','Complete','Open cases'],keys:['School board A','School board B','School board C','School board D','School board E'],by:'emp',
+    cols:g=>[fmt(g.length),(100*g.filter(r=>r.complete).length/Math.max(g.length,1)).toFixed(1)+'%',fmt(g.filter(r=>r.open).length)]}}]}
+];
+
+let page=0,charts=[];const sel={};
+PAGES.forEach(p=>{sel[p.id]={};p.slicers.forEach(s=>sel[p.id][s[0]]=s[2][0])});
+const tabs=document.getElementById('tabs');
+tabs.innerHTML=PAGES.map((p,i)=>`<button role="tab" aria-selected="${i===0}" data-i="${i}">${p.name}</button>`).join('')+'<span class="pg" id="pg"></span>';
+tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{page=+b.dataset.i;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',x===b));render()});
+
+function render(){
+ const p=PAGES[page],s=sel[p.id];
+ const d=p.data.filter(r=>p.slicers.every(([k])=>s[k]==='All'||r[k]===s[k]));
+ document.getElementById('pg').textContent=`Page ${page+1} of ${PAGES.length}`;
+ charts.forEach(c=>c.destroy());charts=[];
+ const cv=document.getElementById('canvas');
+ cv.innerHTML=`<div class="rtitle"><h3>${p.title}</h3><small>Demo data · ${s.year}</small></div>
+  <div class="slicers">${p.slicers.map(([k,l,o])=>`<div class="slicer"><label>${l}</label><div class="opts">${o.map(v=>`<button type="button" data-k="${k}" data-v="${v}" aria-pressed="${s[k]===v}">${v}</button>`).join('')}</div></div>`).join('')}</div>
+  ${p.cards(d).map(c=>`<div class="card"><div class="v">${c[0]}</div><div class="l">${c[1]}</div></div>`).join('')}
+  ${p.visuals(d).map((v,i)=>`<div class="vis ${v.w}"><h4>${v.t}</h4>${v.table?tableHTML(v.table,d):`<div class="box"><canvas id="v${i}"></canvas></div>`}</div>`).join('')}`;
+ cv.querySelectorAll('.slicer button').forEach(b=>b.onclick=()=>{s[b.dataset.k]=b.dataset.v;render()});
+ if(!window.Chart)return;
+ Chart.defaults.font.family='"Segoe UI","Open Sans",sans-serif';Chart.defaults.font.size=11;Chart.defaults.color='#605e5c';
+ p.visuals(d).forEach((v,i)=>{if(v.table)return;
+  const ds=v.sets.map(data=>({data,borderColor:C[0],backgroundColor:v.type==='doughnut'?C:v.type==='line'?'rgba(17,141,255,.12)':C[0],fill:v.type==='line',tension:.25,pointRadius:2,borderWidth:v.type==='doughnut'?1:2,barPercentage:.7}));
+  if(v.target)ds.push({data:MONTHS.map(()=>v.target),type:'line',borderColor:C[2],borderDash:[5,4],pointRadius:0,borderWidth:1.5,fill:false,label:'Target'});
+  charts.push(new Chart(document.getElementById('v'+i),{type:v.type,data:{labels:v.labels,datasets:ds},
+   options:{maintainAspectRatio:false,animation:{duration:300},indexAxis:v.horiz?'y':'x',cutout:'58%',
+    plugins:{legend:{display:v.type==='doughnut',position:'right',labels:{boxWidth:10}},tooltip:{callbacks:{label:x=>' '+(v.money?money(x.raw):fmt(x.raw))}}},
+    scales:v.type==='doughnut'?{}:{x:{grid:{display:!!v.horiz,color:'#edebe9'},ticks:{callback:function(val){const l=this.getLabelForValue(val);return v.horiz?(v.money?money(val):fmt(val)):l}}},
+     y:{grid:{display:!v.horiz,color:'#edebe9'},beginAtZero:!v.target,ticks:{callback:function(val){return v.horiz?this.getLabelForValue(val):(v.money?money(val):fmt(val))}}}}}}));
+ });
+}
+function tableHTML(t,d){
+ const rows=t.keys.map(k=>`<tr><td>${k}</td>${t.cols(d.filter(r=>r[t.by]===k)).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+ return `<table class="tbl"><thead><tr>${t.head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows}<tr class="total"><td>Total</td>${t.cols(d).map(c=>`<td>${c}</td>`).join('')}</tr></tbody></table>`;
+}
+render();
+</script>
+
+</body>
+</html>
