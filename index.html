@@ -14,14 +14,14 @@
 <title>Chizim Ndu | Data and Business Analyst</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* Layout: one-screen overview in 5 scannable columns, then looping project stories, each with its own soft background tint. Single light theme to sit with the Power BI report. */
 :root{
  --bg:#fbfbfa; --ink:#1c1f24; --muted:#69707a; --rule:#e2e4e7; --accent:#0b6e4f; --accent-soft:#dcefe6;
  --good:#1f9d63; --bad:#d64545; --bad-soft:#fbe4e4;
  --pbi-canvas:#eaeaea; --pbi-tile:#fff; --pbi-ink:#252423; --pbi-muted:#605e5c; --pbi-line:#edebe9; --pbi-tab:#f3f2f1; --pbi-gold:#f2c811;
- --site:"Public Sans",system-ui,sans-serif; --pbi:"Segoe UI","Open Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+ --site:"IBM Plex Sans",system-ui,sans-serif;--display:"Fraunces",Georgia,serif; --pbi:"Segoe UI","Open Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
  color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -421,6 +421,61 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 @media (max-width:860px){.split,.lettersgrid{grid-template-columns:1fr;gap:28px}.stage{padding-block:32px}.pile{height:250px}.letter{height:230px}}
 @media (max-width:700px){.cols{grid-template-columns:1fr;row-gap:0}.col{border-left:0;padding:18px 0;border-bottom:1px solid var(--rule)}.col:last-child{border-bottom:0}.hero{min-height:auto}.facts{grid-template-columns:1fr}.imac{width:100%}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.appui{opacity:1}.home{opacity:0}}
+
+/* ===== Design 1: cream, serif, square buttons, underline tabs ===== */
+body{background:#f3efe7;color:#1b1b1b}
+:root{--rule:#ddd5c6;--muted:#6b665e;--ink:#1b1b1b}
+section,header.hero2{scroll-margin-top:64px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(243,239,231,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.tb{display:flex;justify-content:space-between;align-items:center;padding-block:18px}
+.brand{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none}
+.tb nav{display:flex;gap:26px}.tb nav a{color:var(--ink);text-decoration:none;font-size:14px}.tb nav a:hover{color:var(--accent)}
+.hero2{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:end;padding-block:56px 32px}
+.display{font-family:var(--display);font-weight:700;font-size:clamp(58px,9vw,116px);line-height:.92;letter-spacing:-.04em;margin:0}
+.display em{font-weight:400;color:var(--accent)}
+.h-intro{font-size:clamp(17px,1.4vw,18.5px);line-height:1.55;max-width:44ch;margin:24px 0 22px}
+.h-links{display:flex;gap:8px;flex-wrap:wrap}
+.sbtn{font:600 14px var(--site);padding:11px 20px;border:1.5px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+.sbtn.dark,.sbtn:hover{background:var(--ink);color:#f3efe7}.sbtn.dark:hover{background:transparent;color:var(--ink)}
+.h-photo img{width:100%;height:420px;object-fit:cover;border-radius:6px;filter:grayscale(1);transition:filter .5s;display:block}.h-photo img:hover{filter:none}
+.tiles{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:12px;padding-block:8px 64px}
+.tile{background:#fff;border-radius:6px;padding:22px;min-width:0}
+.tile .tl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.tile.dark{background:var(--ink);color:#f3efe7}.tile.dark .tl{color:#a59f94}
+.tile.xpt{grid-row:span 2}
+.tile.xpt ul{list-style:none;margin:0;padding:0}
+.tile.xpt li{display:grid;grid-template-columns:36px 1fr auto;gap:14px;align-items:center;padding:11px 0;border-top:1px solid #34322e}
+.tile.xpt li:first-child{border-top:0}
+.tile.xpt .lg{width:36px;height:36px;border-radius:6px;background:#2c2a27;color:#cfc8bb;font-size:10px;font-weight:700;display:grid;place-items:center;position:relative;overflow:hidden}
+.tile.xpt .lg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:5px}
+.tile.xpt li b{display:block;font-weight:600;font-size:15px}.tile.xpt li div span{color:#cfc8bb;font-size:13.5px}
+.tile.xpt li em{font-style:normal;color:#a59f94;font-size:13px;font-variant-numeric:tabular-nums}
+.tiles>.tile:nth-child(3){grid-row:span 2}
+.chips2{display:flex;flex-wrap:wrap;gap:6px}.chips2 span{font-size:12.5px;padding:5px 10px;border:1px solid var(--rule)}
+.edu2{margin:0;font-size:13.5px;color:var(--muted);line-height:1.6}.edu2 b{color:var(--ink);font-family:var(--display);font-size:19px;font-weight:600}
+.tile.pj{display:grid;gap:2px;align-content:start}
+.tile.pj a{display:grid;padding:10px 0;border-top:1px solid #eee7da;text-decoration:none;color:var(--ink)}.tile.pj a:first-of-type{border-top:0}
+.tile.pj a:hover b{color:var(--accent)}.tile.pj a b{font-size:14.5px}.tile.pj a span{font-size:12.5px;color:var(--muted)}
+.story,#dashboard{border-top:1px solid var(--rule)}
+.sect{font-family:var(--display);font-weight:600;letter-spacing:-.03em;font-size:clamp(34px,3.6vw,52px);margin-bottom:14px}
+.sect:before{display:none}
+.summary{color:#2a2926}
+/* underline tabs everywhere */
+.dqtabs{gap:24px;border-bottom:1px solid var(--rule);margin-bottom:20px}
+.dqtabs button{border:0;border-radius:0;background:transparent;padding:8px 0;color:var(--muted);font-size:14px}
+.dqtabs button[aria-selected="true"]{background:transparent;color:var(--ink);border-bottom:2px solid var(--accent);margin-bottom:-1px}
+.dqtabs button[aria-selected="true"]:after{background:var(--accent);height:2px;opacity:.35}
+.rtabs{margin:4px 0 16px}
+/* squarer cards */
+.sheet,.xl,.flow,.proc,.gs,.green,.emu,.report-scroll,.lettersgrid .rows,.letter,.g-card{border-radius:6px}
+.sheet,.flow,.proc,.lettersgrid .rows{box-shadow:none;border-color:var(--rule)}
+.g-btn,.btn{border-radius:0}
+.contact2{text-align:center;padding-block:72px;border-top:1px solid var(--rule)}
+.cline{font-family:var(--display);font-weight:600;font-size:clamp(26px,3vw,38px);letter-spacing:-.02em;max-width:26ch;margin:0 auto 24px;line-height:1.15}
+.cmail{color:var(--muted);font-size:13px;margin-top:14px;user-select:all}
+@media (max-width:980px){.tiles{grid-template-columns:1fr 1fr}.tile.xpt{grid-column:1/-1;grid-row:auto}.tiles>.tile:nth-child(3){grid-row:auto}}
+@media (max-width:760px){.hero2{grid-template-columns:1fr;gap:28px;padding-block:32px 20px}.h-photo{max-width:320px}.h-photo img{height:360px}.tb nav{gap:14px}.tb nav a{font-size:13px}}
+@media (max-width:520px){.tiles{grid-template-columns:1fr}.tb nav a:nth-child(2){display:none}}
 </style>
 
 </head>
@@ -448,66 +503,29 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
  <symbol id="ptr" viewBox="0 0 24 24"><path d="M5 3l13 7.5-6 1.5-3 6z" fill="#fff" stroke="#111" stroke-width="1.5"/></symbol>
 </svg>
 
-<header class="wrap hero" data-bg="#fbfbfa">
- <div class="cols">
-  <div class="col">
-   <img class="photo" src="img/chizim.jpg" alt="Headshot of Chizim Ndu in a black suit and red tie" title="Chizim Ndu">
-   <h1 class="name">Chizim Ndu</h1>
-   <p class="title">Data and Business Analyst</p>
-   <p class="intro">Data and business analyst with over 4 years of experience in data analysis, reporting and automation across pension, construction software, logistics and public sector environments.</p>
-  </div>
-  <div class="col">
-   <p class="eyebrow">Experience</p>
-   <ul class="xp">
-    <li><span class="badge" style="background:#0b4f8a" role="img" aria-label="Ontario Teachers' Pension Plan logo" title="Ontario Teachers' Pension Plan">OTPP<img src="img/logos/otpp.png" alt="Ontario Teachers' Pension Plan logo" onerror="this.remove()"></span><div><b class="role">Ontario Teachers' Pension Plan</b><span class="co">Pension Data Analyst</span><span class="yr2">2024–2026</span></div></li>
-    <li><span class="badge" style="background:#0b6e4f" role="img" aria-label="Safetyloop logo" title="Safetyloop">SL<img src="img/logos/safetyloop.png" alt="Safetyloop logo" onerror="this.remove()"></span><div><b class="role">Safetyloop</b><span class="co">Business Systems Specialist</span><span class="yr2">2022–2024</span></div></li>
-    <li><span class="badge" style="background:#c0392b" role="img" aria-label="CN Rail logo" title="CN Rail">CN<img src="img/logos/cn.png" alt="CN Rail logo" onerror="this.remove()"></span><div><b class="role">CN Rail</b><span class="co">Data Analyst</span><span class="yr2">2021</span></div></li>
-    <li><span class="badge" style="background:#5b3fa0" role="img" aria-label="Toronto Metropolitan University logo" title="Toronto Metropolitan University">TMU<img src="img/logos/tmu.png" alt="Toronto Metropolitan University logo" onerror="this.remove()"></span><div><b class="role">Toronto Metropolitan University</b><span class="co">System Programmer / Analyst</span><span class="yr2">2021</span></div></li>
-    <li><span class="badge" style="background:linear-gradient(135deg,#8b5cf6,#3b2a8f)" role="img" aria-label="Avasta Incorporated logo" title="Avasta Incorporated">AV<img src="img/logos/avasta.png" alt="Avasta Incorporated logo" onerror="this.remove()"></span><div><b class="role">Avasta Incorporated</b><span class="co">Business Analyst</span><span class="yr2">2020</span></div></li>
-    <li><span class="badge" style="background:#8a5a12" role="img" aria-label="Canada Revenue Agency logo" title="Canada Revenue Agency">CRA<img src="img/logos/cra.png" alt="Canada Revenue Agency logo" onerror="this.remove()"></span><div><b class="role">Canada Revenue Agency</b><span class="co">Data Analyst</span><span class="yr2">2019–2020</span></div></li>
-   </ul>
-  </div>
-  <div class="col">
-   <p class="eyebrow">Skills</p>
-   <div class="skills">
-    <div class="sk"><svg class="i"><use href="#db"/></svg>SQL</div>
-    <div class="sk"><svg class="i"><use href="#bars"/></svg>Power BI</div>
-    <div class="sk"><svg class="i"><use href="#code"/></svg>Python</div>
-    <div class="sk"><svg class="i"><use href="#sheet"/></svg>Excel VBA</div>
-    <div class="sk"><svg class="i"><use href="#iflow"/></svg>Power Automate</div>
-    <div class="sk"><svg class="i"><use href="#share"/></svg>SharePoint</div>
-    <div class="sk"><svg class="i"><use href="#gsuite"/></svg>Google Suite</div>
-    <div class="sk"><svg class="i"><use href="#cloud"/></svg>Azure</div>
-    <div class="sk"><svg class="i"><use href="#spark"/></svg>AI Tools</div>
-   </div>
-  </div>
-  <div class="col">
-   <p class="eyebrow">Projects</p>
-   <ul class="plist">
-    <li><a href="#cleanup"><span class="ico"><svg class="i"><use href="#clean"/></svg></span><span><b>Data quality</b><span>Excel, Power BI and SQL</span></span></a></li>
-    <li><a href="#dashboard"><span class="ico"><svg class="i"><use href="#bars"/></svg></span><span><b>Data visualization and reporting</b><span>Sales, shipments and data quality</span></span></a></li>
-    <li><a href="#automation"><span class="ico"><svg class="i"><use href="#iflow"/></svg></span><span><b>Automation</b><span>Power Automate, process improvement and email alerts</span></span></a></li>
-    <li><a href="#app"><span class="ico"><svg class="i"><use href="#phone"/></svg></span><span><b>Remote mouse app</b></span></a></li>
-    <li><a href="#app"><span class="ico"><svg class="i"><use href="#spark"/></svg></span><span><b>Mobile games</b><span>Spot the Outlier</span></span></a></li>
-   </ul>
-  </div>
-  <div class="col">
-   <p class="eyebrow">Education</p>
-   <div class="edu"><span class="ico"><svg class="i"><use href="#cap"/></svg></span><span><b>BComm</b><span>Business / Information Technology Management · TMU</span></span></div>
-   <p class="eyebrow">Contact</p>
-   <div class="links">
-    <span><svg class="i"><use href="#mail"/></svg>Chizim.Ndu@gmail.com</span>
-    <a href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener"><svg class="i"><use href="#in"/></svg>LinkedIn</a>
-    <a href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#doc"/></svg>Resume (PDF)</a>
-    <span><svg class="i"><use href="#pin"/></svg>Toronto, ON</span>
-   </div>
-  </div>
+<header class="topbar" id="top"><div class="wrap tb"><a href="#top" class="brand">Chizim Ndu</a><nav><a href="#cleanup">Work</a><a href="#experience">Experience</a><a href="#app">Projects</a><a href="#contact">Contact</a></nav></div></header>
+<header class="wrap hero2" data-bg="#f3efe7">
+ <div>
+  <h1 class="display">Data, made <em>clear.</em></h1>
+  <p class="h-intro">Data and business analyst with over 4 years of experience in data analysis, reporting and automation across pension, construction software, logistics and public sector environments.</p>
+  <div class="h-links"><a class="sbtn dark" href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener">Resume</a><a class="sbtn" href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a><button class="sbtn" type="button" id="copyMail2">Copy email</button></div>
  </div>
- <div class="cue"><span class="mouse"></span>Scroll to see the work</div>
+ <div class="h-photo"><img src="img/chizim.jpg" alt="Headshot of Chizim Ndu in a black suit and red tie" title="Chizim Ndu"></div>
 </header>
+<section class="wrap tiles" id="experience" data-bg="#f3efe7">
+ <div class="tile dark xpt"><p class="tl">Experience</p><ul><li><span class="lg" role="img" aria-label="Ontario Teachers' Pension Plan logo" title="Ontario Teachers' Pension Plan">OTPP<img src="https://www.google.com/s2/favicons?domain=otpp.com&sz=64" alt="Ontario Teachers' Pension Plan logo" title="Ontario Teachers' Pension Plan" loading="lazy" onerror="this.remove()"></span><div><b>Ontario Teachers' Pension Plan</b><span>Pension Data Analyst</span></div><em>2024–2026</em></li><li><span class="lg" role="img" aria-label="Safetyloop logo" title="Safetyloop">SL<img src="https://www.google.com/s2/favicons?domain=safetyloop.com&sz=64" alt="Safetyloop logo" title="Safetyloop" loading="lazy" onerror="this.remove()"></span><div><b>Safetyloop</b><span>Business Systems Specialist</span></div><em>2022–2024</em></li><li><span class="lg" role="img" aria-label="CN Rail logo" title="CN Rail">CN<img src="https://www.google.com/s2/favicons?domain=cn.ca&sz=64" alt="CN Rail logo" title="CN Rail" loading="lazy" onerror="this.remove()"></span><div><b>CN Rail</b><span>Data Analyst</span></div><em>2021</em></li><li><span class="lg" role="img" aria-label="Toronto Metropolitan University logo" title="Toronto Metropolitan University">TMU<img src="https://www.google.com/s2/favicons?domain=torontomu.ca&sz=64" alt="Toronto Metropolitan University logo" title="Toronto Metropolitan University" loading="lazy" onerror="this.remove()"></span><div><b>Toronto Metropolitan University</b><span>System Programmer / Analyst</span></div><em>2021</em></li><li><span class="lg" role="img" aria-label="Avasta Incorporated logo" title="Avasta Incorporated">AV</span><div><b>Avasta Incorporated</b><span>Business Analyst</span></div><em>2020</em></li><li><span class="lg" role="img" aria-label="Canada Revenue Agency logo" title="Canada Revenue Agency">CRA<img src="https://www.google.com/s2/favicons?domain=canada.ca&sz=64" alt="Canada Revenue Agency logo" title="Canada Revenue Agency" loading="lazy" onerror="this.remove()"></span><div><b>Canada Revenue Agency</b><span>Data Analyst</span></div><em>2019–2020</em></li></ul></div>
+ <div class="tile"><p class="tl">Skills</p><div class="chips2"><span>SQL</span><span>Power BI</span><span>Python</span><span>Excel VBA</span><span>Power Automate</span><span>SharePoint</span><span>Google Suite</span><span>Azure</span><span>AI Tools</span></div></div>
+ <div class="tile pj"><p class="tl">Work</p>
+  <a href="#cleanup"><b>Data quality</b><span>Excel, Power BI and SQL</span></a>
+  <a href="#dashboard"><b>Data visualization and reporting</b><span>Sales, shipments and data quality</span></a>
+  <a href="#automation"><b>Automation</b><span>Power Automate, process improvement and email alerts</span></a>
+  <a href="#app"><b>Personal projects</b><span>Computer mouse app and Spot the Outlier</span></a>
+ </div>
+ <div class="tile"><p class="tl">Education</p><p class="edu2"><b>Bachelor of Commerce</b><br>Business / Information Technology Management<br>Toronto Metropolitan University</p></div>
+</section>
 
 <!-- 1. Data cleanup -->
-<section class="story tall" id="cleanup" data-bg="#eef3fa">
+<section class="story tall" id="cleanup" data-bg="#f3efe7">
  <div class="stage"><div class="wrap split">
   <div>
    <h2 class="sect">Data quality</h2>
@@ -554,7 +572,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 </section>
 
 <!-- 2. Dashboard -->
-<section class="story" id="dashboard" data-bg="#f0f0ee">
+<section class="story" id="dashboard" data-bg="#f3efe7">
  <div class="stage"><div class="wrap">
   <div class="rhead">
    <div><h2 class="sect">Data visualization and reporting</h2><div class="dqtabs rtabs" id="rtabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-i="0">Sales</button><button type="button" role="tab" aria-selected="false" data-i="1">Shipments</button><button type="button" role="tab" aria-selected="false" data-i="2">Data quality</button></div><p class="summary">A sample Power BI style report showing the <b>three kinds of reporting</b> I build: sales, shipment tracking and member data quality. Each page has its own filters, headline numbers and charts.</p></div>
@@ -570,7 +588,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 </section>
 
 <!-- 3. Automation -->
-<section class="story tall" id="automation" data-bg="#ecf5ef">
+<section class="story tall" id="automation" data-bg="#f3efe7">
  <div class="stage"><div class="wrap split">
   <div>
    <h2 class="sect">Automation</h2>
@@ -616,7 +634,7 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
 </section>
 
 <!-- 5. App -->
-<section class="story" id="app" data-bg="#f1eff7">
+<section class="story" id="app" data-bg="#f3efe7">
  <div class="stage"><div class="wrap">
   <div style="text-align:center;margin-bottom:20px">
    <h2 class="sect center">Personal projects</h2>
@@ -687,21 +705,17 @@ footer{padding-block:20px 36px;color:var(--muted);font-size:12px;text-align:cent
  </div></div>
 </section>
 
-<section class="wrap contact" id="contact" data-bg="#fbfbfa">
- <div>
-  <img class="photo" src="img/chizim.jpg" alt="Headshot of Chizim Ndu" title="Chizim Ndu">
-  <p class="summary" style="margin:0 auto">Open to data and business analyst roles in the Greater Toronto Area and remote.</p>
-  <div class="links">
-   <span><svg class="i"><use href="#mail"/></svg>Chizim.Ndu@gmail.com</span>
-   <a href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener"><svg class="i"><use href="#in"/></svg>LinkedIn</a>
-   <a href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener"><svg class="i"><use href="#doc"/></svg>Resume (PDF)</a>
-  </div>
- </div>
+<section class="wrap contact2" id="contact" data-bg="#f3efe7">
+ <p class="cline">Open to data and business analyst roles in the Greater Toronto Area and remote.</p>
+ <div class="h-links" style="justify-content:center"><a class="sbtn dark" href="mailto:Chizim.Ndu@gmail.com">Email me</a><a class="sbtn" href="https://www.linkedin.com/in/chizim-ndu" target="_blank" rel="noopener">LinkedIn</a><a class="sbtn" href="Chizim_Ndu_Resume.pdf" target="_blank" rel="noopener">Resume</a></div>
+ <p class="cmail">Chizim.Ndu@gmail.com</p>
 </section>
 <footer>Chizim Ndu · Toronto</footer>
 
 <script src="js/chart.umd.min.js"></script>
 <script>
+const cm2=document.getElementById('copyMail2');if(cm2)cm2.onclick=e=>{const b=e.currentTarget;navigator.clipboard.writeText('Chizim.Ndu@gmail.com').then(()=>b.textContent='Copied',()=>b.textContent='Chizim.Ndu@gmail.com')};
+
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 
